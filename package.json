@@ -1,6 +1,6 @@
 {
   "name": "jsonexport",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Makes easy to convert JSON to CSV",
   "main": "jsonexport.js",
   "scripts": {

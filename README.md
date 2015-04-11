@@ -1,7 +1,7 @@
 # jsonexport
 This module makes easy to convert JSON to CSV and its very customizable.
 
-#Usage
+# Usage
 Installation command is `npm install jsonexport`.
 
 ```js
@@ -13,10 +13,10 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
 });
 ```
 
-##JSON Array Example
+## JSON Array Example
 
-###Simple Array
-####Code
+### Simple Array
+#### Code
 
 ```js
 var jsonexport = require('jsonexport');
@@ -41,7 +41,7 @@ jsonexport(contacts,function(err, csv){
 });
 ```
 
-####Result
+#### Result
     name;lastname
     Bob;Smith
     James;David
@@ -49,8 +49,8 @@ jsonexport(contacts,function(err, csv){
     David;Martin
 
 
-###Complex Array
-####Code
+### Complex Array
+#### Code
 ```js
 var jsonexport = require('jsonexport');
 
@@ -84,17 +84,17 @@ jsonexport(contacts,function(err, csv){
     console.log(csv);
 });
 ```
-####Result
+#### Result
     lastname;name;family.type;family.name;nickname;location
     Smith;Bob;Father;Peter;;
     David;James;Mother;Julie;;
     Miller;Robert;;;;1231,3214,4214
     Martin;David;;;dmartin;
 
-##JSON Object Example
+## JSON Object Example
 
-###Simple Object
-####Code
+### Simple Object
+#### Code
 
 ```js
 var jsonexport = require('jsonexport');
@@ -111,13 +111,13 @@ jsonexport(stats,function(err, csv){
 });
 ```
 
-####Result
+#### Result
     cars;12
     roads;5
     traffic;slow
 
-###Complex Object
-####Code
+### Complex Object
+#### Code
 
 ```js
 var jsonexport = require('jsonexport');
@@ -140,7 +140,7 @@ jsonexport(stats,function(err, csv){
 });
 ```
 
-####Result
+#### Result
     cars;12
     roads;5
     traffic;slow
@@ -149,7 +149,7 @@ jsonexport(stats,function(err, csv){
     speed.min;5
     size;10,20
 
-##Customization
+## Customization
 In order to get the most of out of this module, you can customize many parameters, check the list:
 
     Option : Default Value
@@ -171,7 +171,7 @@ In order to get the most of out of this module, you can customize many parameter
     handleArray: null,
     handleObject: null
 
-###Handle Customization
+### Handle Customization
 Lets say you want to prepend a text to every string in your CSV file, how to do it?
 
 ```js
