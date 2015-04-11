@@ -1,8 +1,8 @@
 {
   "name": "jsonexport",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Makes easy to convert JSON to CSV",
-  "main": "jsonexport.js",
+  "main": "./lib",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
