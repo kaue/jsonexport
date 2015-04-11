@@ -4,7 +4,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
 # Usage
 Installation command is `npm install jsonexport`.
 
-```js
+```javascript
 var jsonexport = require('jsonexport');
 
 jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function(err, csv){
@@ -18,7 +18,7 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
 ### Simple Array
 #### Code
 
-```js
+```javascript
 var jsonexport = require('jsonexport');
 
 var contacts = [{
@@ -51,7 +51,7 @@ jsonexport(contacts,function(err, csv){
 
 ### Complex Array
 #### Code
-```js
+```javascript
 var jsonexport = require('jsonexport');
 
 var contacts = [{
@@ -96,7 +96,7 @@ jsonexport(contacts,function(err, csv){
 ### Simple Object
 #### Code
 
-```js
+```javascript
 var jsonexport = require('jsonexport');
 
 var stats = {
@@ -119,7 +119,7 @@ jsonexport(stats,function(err, csv){
 ### Complex Object
 #### Code
 
-```js
+```javascript
 var jsonexport = require('jsonexport');
 
 var stats = {
@@ -174,7 +174,7 @@ In order to get the most of out of this module, you can customize many parameter
 ### Handle Customization
 Lets say you want to prepend a text to every string in your CSV file, how to do it?
 
-```js
+```javascript
 var jsonexport = require('jsonexport');
 
 var options = {
