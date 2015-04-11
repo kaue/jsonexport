@@ -5,13 +5,12 @@ This module makes easy to convert JSON to CSV and its very customizable.
 Installation command is `npm install jsonexport`.
 
 ```js
+var jsonexport = require('jsonexport');
 
-    var jsonexport = require('jsonexport');
-
-    jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function(err, csv){
-        if(err) return console.log(err);
-        console.log(csv);
-    });
+jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function(err, csv){
+    if(err) return console.log(err);
+    console.log(csv);
+});
 ```
 
 ##JSON Array Example
@@ -20,28 +19,26 @@ Installation command is `npm install jsonexport`.
 ####Code
 
 ```js
+var jsonexport = require('jsonexport');
 
-    var jsonexport = require('jsonexport');
+var contacts = [{
+    name: 'Bob',
+    lastname: 'Smith'
+},{
+    name: 'James',
+    lastname: 'David'
+},{
+    name: 'Robert',
+    lastname: 'Miller'
+},{
+    name: 'David',
+    lastname: 'Martin'
+}];
 
-    var contacts = [{
-        name: 'Bob',
-        lastname: 'Smith'
-    },{
-        name: 'James',
-        lastname: 'David'
-    },{
-        name: 'Robert',
-        lastname: 'Miller'
-    },{
-        name: 'David',
-        lastname: 'Martin'
-    }];
-
-    jsonexport(contacts,function(err, csv){
-        if(err) return console.log(err);
-        console.log(csv);
-    });
-
+jsonexport(contacts,function(err, csv){
+    if(err) return console.log(err);
+    console.log(csv);
+});
 ```
 
 ####Result
@@ -55,39 +52,37 @@ Installation command is `npm install jsonexport`.
 ###Complex Array
 ####Code
 ```js
+var jsonexport = require('jsonexport');
 
-    var jsonexport = require('jsonexport');
+var contacts = [{
+   name: 'Bob',
+   lastname: 'Smith',
+   family: {
+       name: 'Peter',
+       type: 'Father'
+   }
+},{
+   name: 'James',
+   lastname: 'David',
+   family:{
+       name: 'Julie',
+       type: 'Mother'
+   }
+},{
+   name: 'Robert',
+   lastname: 'Miller',
+   family: null,
+   location: [1231,3214,4214]
+},{
+   name: 'David',
+   lastname: 'Martin',
+   nickname: 'dmartin'
+}];
 
-    var contacts = [{
-       name: 'Bob',
-       lastname: 'Smith',
-       family: {
-           name: 'Peter',
-           type: 'Father'
-       }
-    },{
-       name: 'James',
-       lastname: 'David',
-       family:{
-           name: 'Julie',
-           type: 'Mother'
-       }
-    },{
-       name: 'Robert',
-       lastname: 'Miller',
-       family: null,
-       location: [1231,3214,4214]
-    },{
-       name: 'David',
-       lastname: 'Martin',
-       nickname: 'dmartin'
-    }];
-
-    jsonexport(contacts,function(err, csv){
-        if(err) return console.log(err);
-        console.log(csv);
-    });
-
+jsonexport(contacts,function(err, csv){
+    if(err) return console.log(err);
+    console.log(csv);
+});
 ```
 ####Result
     lastname;name;family.type;family.name;nickname;location
@@ -102,20 +97,18 @@ Installation command is `npm install jsonexport`.
 ####Code
 
 ```js
+var jsonexport = require('jsonexport');
 
-    var jsonexport = require('jsonexport');
+var stats = {
+    cars: 12,
+    roads: 5,
+    traffic: 'slow'
+};
 
-    var stats = {
-        cars: 12,
-        roads: 5,
-        traffic: 'slow'
-    };
-
-    jsonexport(stats,function(err, csv){
-        if(err) return console.log(err);
-        console.log(csv);
-    });
-
+jsonexport(stats,function(err, csv){
+    if(err) return console.log(err);
+    console.log(csv);
+});
 ```
 
 ####Result
@@ -127,25 +120,24 @@ Installation command is `npm install jsonexport`.
 ####Code
 
 ```js
+var jsonexport = require('jsonexport');
 
-    var jsonexport = require('jsonexport');
+var stats = {
+    cars: 12,
+    roads: 5,
+    traffic: 'slow',
+    speed: {
+        max: 123,
+        avg: 20,
+        min: 5
+    },
+    size: [10,20]
+};
 
-    var stats = {
-        cars: 12,
-        roads: 5,
-        traffic: 'slow',
-        speed: {
-            max: 123,
-            avg: 20,
-            min: 5
-        },
-        size: [10,20]
-    };
-
-    jsonexport(stats,function(err, csv){
-        if(err) return console.log(err);
-        console.log(csv);
-    });
+jsonexport(stats,function(err, csv){
+    if(err) return console.log(err);
+    console.log(csv);
+});
 ```
 
 ####Result
@@ -183,19 +175,18 @@ In order to get the most of out of this module, you can customize many parameter
 Lets say you want to prepend a text to every string in your CSV file, how to do it?
 
 ```js
+var jsonexport = require('jsonexport');
 
-    var jsonexport = require('jsonexport');
+var options = {
+    handleString: function(string, name){
+        return 'Hey - ' + string;
+    }
+};
 
-    var options = {
-        handleString: function(string, name){
-            return 'Hey - ' + string;
-        }
-    };
-
-    jsonexport({lang: 'Node.js',module: 'jsonexport'}, options, function(err, csv){
-        if(err) return console.log(err);
-        console.log(csv);
-    });
+jsonexport({lang: 'Node.js',module: 'jsonexport'}, options, function(err, csv){
+    if(err) return console.log(err);
+    console.log(csv);
+});
 ```
 
 The output would be:
