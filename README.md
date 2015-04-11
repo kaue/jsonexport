@@ -191,6 +191,25 @@ handleDate: null,
 handleArray: null,
 handleObject: null
 ```
+####Options
+
+- `headerPathString` - `String` Used to create the propriety path, `contact.name`.
+- `rowDelimiter` - `String` Change the file row delimiter, defaults to `;`.
+- `endOfLine` - `String` Replace the OS default EOL.
+- `mainPathItem` - `String` Every header will have the `mainPathItem` as the base.
+- `arrayPathString` - `String` This is used to output primitive arrays in a single column, defaults to `,`
+- `booleanTrueString` - `String` Will be used instead of `true`.
+- `booleanFalseString` - `String` Will be used instead of `false`.
+- `includeHeaders` - `Boolean` Set this option to false to hide the CSV headers.
+- `orderHeaders` - `Boolean` By default the most used columns are shown first.
+- `undefinedString` - `String` If you want to display a custom value for undefined strings, use this option.
+- `verticalOutput` - `Boolean` Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
+- `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
+- `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
+- `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
+- `handleDate` - `Function` Use this to customize all `Dates` in the CSV file.
+- `handleArray` - `Function` Use this to customize all `Arrays` in the CSV file.
+- `handleObject` - `Function` Use this to customize all `Objects` in the CSV file.
 
 ### Handle Customization
 
