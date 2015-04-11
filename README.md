@@ -2,6 +2,7 @@
 This module makes easy to convert JSON to CSV and its very customizable.
 
 # Usage
+
 Installation command is `npm install jsonexport`.
 
 ```javascript
@@ -16,6 +17,7 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
 ## JSON Array Example
 
 ### Simple Array
+
 #### Code
 
 ```javascript
@@ -42,15 +44,19 @@ jsonexport(contacts,function(err, csv){
 ```
 
 #### Result
-    name;lastname
-    Bob;Smith
-    James;David
-    Robert;Miller
-    David;Martin
 
+```
+name;lastname
+Bob;Smith
+James;David
+Robert;Miller
+David;Martin
+```
 
 ### Complex Array
+
 #### Code
+
 ```javascript
 var jsonexport = require('jsonexport');
 
@@ -84,16 +90,21 @@ jsonexport(contacts,function(err, csv){
     console.log(csv);
 });
 ```
+
 #### Result
-    lastname;name;family.type;family.name;nickname;location
-    Smith;Bob;Father;Peter;;
-    David;James;Mother;Julie;;
-    Miller;Robert;;;;1231,3214,4214
-    Martin;David;;;dmartin;
+
+```
+lastname;name;family.type;family.name;nickname;location
+Smith;Bob;Father;Peter;;
+David;James;Mother;Julie;;
+Miller;Robert;;;;1231,3214,4214
+Martin;David;;;dmartin;
+```
 
 ## JSON Object Example
 
 ### Simple Object
+
 #### Code
 
 ```javascript
@@ -112,11 +123,15 @@ jsonexport(stats,function(err, csv){
 ```
 
 #### Result
-    cars;12
-    roads;5
-    traffic;slow
+
+```
+cars;12
+roads;5
+traffic;slow
+```
 
 ### Complex Object
+
 #### Code
 
 ```javascript
@@ -141,37 +156,44 @@ jsonexport(stats,function(err, csv){
 ```
 
 #### Result
-    cars;12
-    roads;5
-    traffic;slow
-    speed.max;123
-    speed.avg;20
-    speed.min;5
-    size;10,20
+
+```
+cars;12
+roads;5
+traffic;slow
+speed.max;123
+speed.avg;20
+speed.min;5
+size;10,20
+```
 
 ## Customization
+
 In order to get the most of out of this module, you can customize many parameters, check the list:
 
-    Option : Default Value
-    headerPathString: '.',
-    rowDelimiter: ';',
-    endOfLine: null,
-    mainPathItem: null,
-    arrayPathString: ',',
-    booleanTrueString: null,
-    booleanFalseString: null,
-    includeHeaders: true,
-    orderHeaders: true,
-    undefinedString: '',
-    verticalOutput: true,
-    handleString: null,
-    handleNumber: null,
-    handleBoolean: null,
-    handleDate: null,
-    handleArray: null,
-    handleObject: null
+```
+Option : Default Value
+headerPathString: '.',
+rowDelimiter: ';',
+endOfLine: null,
+mainPathItem: null,
+arrayPathString: ',',
+booleanTrueString: null,
+booleanFalseString: null,
+includeHeaders: true,
+orderHeaders: true,
+undefinedString: '',
+verticalOutput: true,
+handleString: null,
+handleNumber: null,
+handleBoolean: null,
+handleDate: null,
+handleArray: null,
+handleObject: null
+```
 
 ### Handle Customization
+
 Lets say you want to prepend a text to every string in your CSV file, how to do it?
 
 ```javascript
@@ -191,6 +213,7 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, options, function(err, csv){
 
 The output would be:
 
-    lang;Hey - Node.js
-    module;Hey - jsonexport
-
+```
+lang;Hey - Node.js
+module;Hey - jsonexport
+```
