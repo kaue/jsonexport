@@ -3,7 +3,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 Changelog
 ----------------------
-v1.05 - Create new lines in the CSV file to handle JSON objects with arrays<br>
+v1.0.6 - Create new lines in the CSV file to handle JSON objects with arrays<br>
 
 # Usage
 
@@ -178,10 +178,10 @@ In order to get the most of out of this module, you can customize many parameter
 ####Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
-- `rowDelimiter` - `String` Change the file row delimiter, defaults to `;`.
+- `rowDelimiter` - `String` Change the file row delimiter, defaults to `,`.
 - `endOfLine` - `String` Replace the OS default EOL.
 - `mainPathItem` - `String` Every header will have the `mainPathItem` as the base.
-- `arrayPathString` - `String` This is used to output primitive arrays in a single column, defaults to `,`
+- `arrayPathString` - `String` This is used to output primitive arrays in a single column, defaults to `;`
 - `booleanTrueString` - `String` Will be used instead of `true`.
 - `booleanFalseString` - `String` Will be used instead of `false`.
 - `includeHeaders` - `Boolean` Set this option to false to hide the CSV headers.
