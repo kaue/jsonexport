@@ -1,6 +1,10 @@
 # jsonexport
 This module makes easy to convert JSON to CSV and its very customizable.
 
+Changelog
+----------------------
+v1.05 - Create new lines in the CSV file to handle JSON objects with arrays<br>
+
 # Usage
 
 Installation command is `npm install jsonexport`.
