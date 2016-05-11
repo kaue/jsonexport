@@ -5,6 +5,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 Changelog
 ----------------------
+v1.1.0 - Expose library as CLI
 v1.0.7 - Fix for prototyped properties<br>
 v1.0.6 - Create new lines in the CSV file to handle JSON objects with arrays<br>
 
