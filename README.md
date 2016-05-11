@@ -182,7 +182,10 @@ In order to get the most of out of this module, you can customize many parameter
 ####Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
-- `rowDelimiter` - `String` Change the file row delimiter, defaults to `,` for **cvs format**. `\t` for **xls format**.
+- `rowDelimiter` - `String` Change the file row delimiter
+    - Defaults to `,` (**cvs format**).
+    - Use `\t` for **xls format**.
+    - Use `;` for (**windows excel .csv format**).
 - `endOfLine` - `String` Replace the OS default EOL.
 - `mainPathItem` - `String` Every header will have the `mainPathItem` as the base.
 - `arrayPathString` - `String` This is used to output primitive arrays in a single column, defaults to `;`
