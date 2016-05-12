@@ -1,5 +1,6 @@
 # jsonexport
 
+[![Known Vulnerabilities](https://snyk.io/test/npm/jsonexport/badge.svg)](https://snyk.io/test/npm/jsonexport)
 [![NPM Version](http://img.shields.io/npm/v/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM Downloads](https://img.shields.io/npm/dm/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM Downloads](https://img.shields.io/npm/dt/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
