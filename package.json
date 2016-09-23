@@ -1,6 +1,6 @@
 {
   "name": "jsonexport",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Makes easy to convert JSON to CSV",
   "main": "./lib",
   "scripts": {
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cnova/jsonexport.git"
+    "url": "https://github.com/kauegimenes/jsonexport.git"
   },
   "keywords": ["export", "json", "to", "2", "csv", "converter", "output", "array", "object", "json-to-csv", "json2csv", "parse"],
   "author": "Kauê Gimenes",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Cnova/jsonexport/issues"
+    "url": "https://github.com/kauegimenes/jsonexport/issues"
   },
-  "homepage": "https://github.com/Cnova/jsonexport",
+  "homepage": "https://github.com/kauegimenes/jsonexport",
   "dependencies": {
     "underscore": "^1.8.3"
   }
