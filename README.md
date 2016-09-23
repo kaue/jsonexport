@@ -10,7 +10,7 @@
 
 This module makes easy to convert JSON to CSV and its very customizable.
 
-[Project Page](http://cnova.github.io/jsonexport)
+[Project Page](http://kauegimenes.github.io/jsonexport/)
 
 Changelog
 ----------------------
