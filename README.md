@@ -14,6 +14,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 Changelog
 ----------------------
+- v1.2.0 - orderHeaders defaults to false
 - v1.1.2 - Escaping text content if needed
 - v1.1.0 - Expose library as CLI
 - v1.0.7 - Fix for prototyped properties
@@ -203,7 +204,7 @@ In order to get the most of out of this module, you can customize many parameter
 - `booleanTrueString` - `String` Will be used instead of `true`.
 - `booleanFalseString` - `String` Will be used instead of `false`.
 - `includeHeaders` - `Boolean` Set this option to false to hide the CSV headers.
-- `orderHeaders` - `Boolean` By default the most used columns are shown first.
+- `orderHeaders` - `Boolean` The most used columns are shown first. (defaults to `false`).
 - `undefinedString` - `String` If you want to display a custom value for undefined strings, use this option. Defaults to ` `.
 - `verticalOutput` - `Boolean` Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
 - `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
