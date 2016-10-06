@@ -217,7 +217,7 @@ In order to get the most of out of this module, you can customize many parameter
 - `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
 - `handleDate` - `Function` Use this to customize all `Dates` in the CSV file.
 
-### Handle Customization
+### Handle Function Option Example
 
 Lets say you want to prepend a text to every string in your CSV file, how to do it?
 
