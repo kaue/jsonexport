@@ -23,6 +23,7 @@ Changelog
 # Usage
 
 Installation command is `npm install jsonexport`.
+Run tests with `npm test`.
 
 ```javascript
 var jsonexport = require('jsonexport');
@@ -211,8 +212,6 @@ In order to get the most of out of this module, you can customize many parameter
 - `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
 - `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
 - `handleDate` - `Function` Use this to customize all `Dates` in the CSV file.
-- `handleArray` - `Function` Use this to customize all `Arrays` in the CSV file.
-- `handleObject` - `Function` Use this to customize all `Objects` in the CSV file.
 
 ### Handle Customization
 
