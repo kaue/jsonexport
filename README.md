@@ -1,6 +1,7 @@
 # jsonexport
 
 [![Travis](https://travis-ci.org/kauegimenes/jsonexport.svg)](https://travis-ci.org/kauegimenes/jsonexport)
+[![bitHound Overall Score](https://www.bithound.io/github/kauegimenes/jsonexport/badges/score.svg)](https://www.bithound.io/github/kauegimenes/jsonexport)
 [![Known Vulnerabilities](https://snyk.io/test/npm/jsonexport/badge.svg)](https://snyk.io/test/npm/jsonexport)
 [![NPM Version](http://img.shields.io/npm/v/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM Downloads](https://img.shields.io/npm/dm/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
