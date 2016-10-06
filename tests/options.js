@@ -1,44 +1,6 @@
 var chai = require('chai');
-var expect = chai.expect; // we are using the "expect" style of Chai
+var expect = chai.expect;
 var jsonexport = require('../lib/index');
-
-const SIMPLE_OBJECT = {
-    lang: 'Node.js',
-    module: 'jsonexport'
-};
-const COMPLEX_OBJECT = {
-    cars: 12,
-    roads: 5,
-    traffic: 'slow',
-    speed: {
-        max: 123,
-        avg: 20,
-        min: 5
-    },
-    size: [10,20]
-};
-const SIMPLE_ARRAY = [{
-    name: 'Bob',
-    lastname: 'Smith'
-},{
-    name: 'James',
-    lastname: 'David'
-}];
-const COMPLEX_ARRAY = [{
-   name: 'Bob',
-   lastname: 'Smith',
-   family: {
-       name: 'Peter',
-       type: 'Father'
-   }
-},{
-   name: 'James',
-   lastname: 'David',
-   family:{
-       name: 'Julie',
-       type: 'Mother'
-   }
-}];
 
 describe('Options', () => {
     it('headerPathString', () => {
@@ -137,33 +99,36 @@ describe('Options', () => {
             expect(csv).to.have.string('a,b');
         });
     });
-    it('handleString', () => {
-        jsonexport({a: 'test', b: true}, {
-            handleString: (value, name) => value + "|||"
-        }, (err, csv) => {
-            expect(csv).to.have.string('a,test|||');
+    describe('Handlers', () => {
+        it('handleString', () => {
+            jsonexport({a: 'test', b: true}, {
+                handleString: (value, name) => value + "|||"
+            }, (err, csv) => {
+                expect(csv).to.have.string('a,test|||');
+            });
         });
-    });
-    it('handleNumber', () => {
-        jsonexport({a: 1, b: true}, {
-            handleNumber: (value, name) => value + "|||"
-        }, (err, csv) => {
-            expect(csv).to.have.string('a,1|||');
+        it('handleNumber', () => {
+            jsonexport({a: 1, b: true}, {
+                handleNumber: (value, name) => value + "|||"
+            }, (err, csv) => {
+                expect(csv).to.have.string('a,1|||');
+            });
         });
-    });
-    it('handleBoolean', () => {
-        jsonexport({a: true, b: true}, {
-            handleBoolean: (value, name) => value + "|||"
-        }, (err, csv) => {
-            expect(csv).to.have.string('a,true|||');
+        it('handleBoolean', () => {
+            jsonexport({a: true, b: true}, {
+                handleBoolean: (value, name) => value + "|||"
+            }, (err, csv) => {
+                expect(csv).to.have.string('a,true|||');
+            });
         });
-    });
-    it('handleDate', () => {
-        var date = new Date();
-        jsonexport({a: date, b: true}, {
-            handleDate: (value, name) => value + "|||"
-        }, (err, csv) => {
-            expect(csv).to.have.string('a,' + date + '|||');
+        it('handleDate', () => {
+            var date = new Date();
+            jsonexport({a: date, b: true}, {
+                handleDate: (value, name) => value + "|||"
+            }, (err, csv) => {
+                expect(csv).to.have.string('a,' + date + '|||');
+            });
         });
-    });    
+    })
+
 })
