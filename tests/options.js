@@ -129,6 +129,5 @@ describe('Options', () => {
                 expect(csv).to.have.string('a,' + date + '|||');
             });
         });
-    })
-
-})
+    });
+});
