@@ -15,9 +15,11 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 Changelog
 ----------------------
+- v1.3.0 - some bug fixes + mocha tests/ + removed options handleArray and handleObject
+- v1.2.2 - special chars escaping improvement (papswell)
 - v1.2.0 - orderHeaders defaults to false
-- v1.1.2 - Escaping text content if needed
-- v1.1.0 - Expose library as CLI
+- v1.1.2 - Escaping text content if needed (papswell)
+- v1.1.0 - Expose library as CLI (cburgmer)
 - v1.0.7 - Fix for prototyped properties
 - v1.0.6 - Create new lines in the CSV file to handle JSON objects with arrays
 
