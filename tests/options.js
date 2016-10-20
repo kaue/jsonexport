@@ -17,6 +17,12 @@ describe('Options', () => {
             expect(csv).to.have.string('a|true');
         });
     });
+    it('defaults', () => {
+        jsonexport({a: true, b: true}, (err, csv) => {
+            expect(csv).to.have.string('a,true');
+            expect(csv).to.have.string('b,true');
+        });
+    });
     it('textDelimiter with linebreak', () => {
         jsonexport({a: '\n', b: true}, {
             textDelimiter: '|'
