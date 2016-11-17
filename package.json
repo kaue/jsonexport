@@ -4,7 +4,8 @@
   "description": "Makes easy to convert JSON to CSV",
   "main": "./lib",
   "scripts": {
-    "test": "mocha tests/*.js tests/**/*.js"
+    "test": "mocha tests/*.js tests/**/*.js",
+    "lint": "./node_modules/.bin/jshint ./lib/index.js"
   },
   "bin": {
     "jsonexport": "bin/jsonexport.js"
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "jshint": "^2.9.4",
     "mocha": "^3.1.0"
   }
 }
