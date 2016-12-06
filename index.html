@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>jsonexport by Cnova</title>
+    <title>jsonexport by kauegimenes</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -18,48 +18,62 @@
         <h1>jsonexport</h1>
         <p>Makes easy to convert JSON to CSV</p>
 
-        <p class="view"><a href="https://github.com/Cnova/jsonexport">View the Project on GitHub <small>Cnova/jsonexport</small></a></p>
+        <p class="view"><a href="https://github.com/kauegimenes/jsonexport">View the Project on GitHub <small>kauegimenes/jsonexport</small></a></p>
 
 
         <ul>
-          <li><a href="https://github.com/Cnova/jsonexport/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Cnova/jsonexport/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Cnova/jsonexport">View On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/kauegimenes/jsonexport/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/kauegimenes/jsonexport/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/kauegimenes/jsonexport">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
         <h1>
-<a id="json-export" class="anchor" href="#json-export" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Export</h1>
+<a id="jsonexport" class="anchor" href="#jsonexport" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jsonexport</h1>
 
 <p>This module makes easy to convert JSON to CSV and its very customizable.</p>
 
-<h2>
-<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h2>
+<p><a href="http://kauegimenes.github.io/jsonexport/">Project Page</a></p>
 
-<p>v1.0.6 - Create new lines in the CSV file to handle JSON objects with arrays<br></p>
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changelog</h2>
+
+<ul>
+<li>v1.4.2 - default date handler return date.toLocaleString (jclay)</li>
+<li>v1.3.2 - fix userOptions optional</li>
+<li>v1.3.1 - object &amp; array test</li>
+<li>v1.3.0 - some bug fixes + mocha tests/ + removed options handleArray and handleObject</li>
+<li>v1.2.2 - special chars escaping improvement (papswell)</li>
+<li>v1.2.0 - orderHeaders defaults to false</li>
+<li>v1.1.2 - Escaping text content if needed (papswell)</li>
+<li>v1.1.0 - Expose library as CLI (cburgmer)</li>
+<li>v1.0.7 - Fix for prototyped properties</li>
+<li>v1.0.6 - Create new lines in the CSV file to handle JSON objects with arrays</li>
+</ul>
 
 <h1>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
 
-<p>Installation command is <code>npm install jsonexport</code>.</p>
+<p>Installation command is <code>npm install jsonexport</code>.
+Run tests with <code>npm test</code>.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
 
-jsonexport({lang<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Node.js<span class="pl-pds">'</span></span>,module<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>}, {rowDelimiter<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>|<span class="pl-pds">'</span></span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
-    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(csv);
+<span class="pl-en">jsonexport</span>({lang<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Node.js<span class="pl-pds">'</span></span>,module<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>}, {rowDelimiter<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>|<span class="pl-pds">'</span></span>}, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
+    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(csv);
 });</pre></div>
 
 <h2>
-<a id="json-array-example" class="anchor" href="#json-array-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Array Example</h2>
+<a id="json-array-example" class="anchor" href="#json-array-example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSON Array Example</h2>
 
 <h3>
-<a id="simple-array" class="anchor" href="#simple-array" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple Array</h3>
+<a id="simple-array" class="anchor" href="#simple-array" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Simple Array</h3>
 
 <h4>
-<a id="code" class="anchor" href="#code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h4>
+<a id="code" class="anchor" href="#code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Code</h4>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
 
 <span class="pl-k">var</span> contacts <span class="pl-k">=</span> [{
     name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Bob<span class="pl-pds">'</span></span>,
@@ -75,28 +89,28 @@ jsonexport({lang<span class="pl-k">:</span> <span class="pl-s"><span class="pl-p
     lastname<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Martin<span class="pl-pds">'</span></span>
 }];
 
-jsonexport(contacts,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
-    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(csv);
+<span class="pl-en">jsonexport</span>(contacts,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
+    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(csv);
 });</pre></div>
 
 <h4>
-<a id="result" class="anchor" href="#result" aria-hidden="true"><span class="octicon octicon-link"></span></a>Result</h4>
+<a id="result" class="anchor" href="#result" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Result</h4>
 
-<pre><code>name;lastname
-Bob;Smith
-James;David
-Robert;Miller
-David;Martin
+<pre><code>name,lastname
+Bob,Smith
+James,David
+Robert,Miller
+David,Martin
 </code></pre>
 
 <h3>
-<a id="complex-array" class="anchor" href="#complex-array" aria-hidden="true"><span class="octicon octicon-link"></span></a>Complex Array</h3>
+<a id="complex-array" class="anchor" href="#complex-array" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Complex Array</h3>
 
 <h4>
-<a id="code-1" class="anchor" href="#code-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h4>
+<a id="code-1" class="anchor" href="#code-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Code</h4>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
 
 <span class="pl-k">var</span> contacts <span class="pl-k">=</span> [{
    name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Bob<span class="pl-pds">'</span></span>,
@@ -123,31 +137,31 @@ David;Martin
    nickname<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>dmartin<span class="pl-pds">'</span></span>
 }];
 
-jsonexport(contacts,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
-    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(csv);
+<span class="pl-en">jsonexport</span>(contacts,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
+    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(csv);
 });</pre></div>
 
 <h4>
-<a id="result-1" class="anchor" href="#result-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Result</h4>
+<a id="result-1" class="anchor" href="#result-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Result</h4>
 
-<pre><code>lastname;name;family.type;family.name;nickname;location
-Smith;Bob;Father;Peter;;
-David;James;Mother;Julie;;
-Miller;Robert;;;;1231,3214,4214
-Martin;David;;;dmartin;
+<pre><code>lastname,name,family.type,family.name,nickname,location
+Smith,Bob,Father,Peter,,
+David,James,Mother,Julie,,
+Miller,Robert,,,,1231,3214,4214
+Martin,David,,,dmartin,
 </code></pre>
 
 <h2>
-<a id="json-object-example" class="anchor" href="#json-object-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Object Example</h2>
+<a id="json-object-example" class="anchor" href="#json-object-example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSON Object Example</h2>
 
 <h3>
-<a id="simple-object" class="anchor" href="#simple-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple Object</h3>
+<a id="simple-object" class="anchor" href="#simple-object" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Simple Object</h3>
 
 <h4>
-<a id="code-2" class="anchor" href="#code-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h4>
+<a id="code-2" class="anchor" href="#code-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Code</h4>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
 
 <span class="pl-k">var</span> stats <span class="pl-k">=</span> {
     cars<span class="pl-k">:</span> <span class="pl-c1">12</span>,
@@ -155,26 +169,26 @@ Martin;David;;;dmartin;
     traffic<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>slow<span class="pl-pds">'</span></span>
 };
 
-jsonexport(stats,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
-    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(csv);
+<span class="pl-en">jsonexport</span>(stats,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
+    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(csv);
 });</pre></div>
 
 <h4>
-<a id="result-2" class="anchor" href="#result-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Result</h4>
+<a id="result-2" class="anchor" href="#result-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Result</h4>
 
-<pre><code>cars;12
-roads;5
-traffic;slow
+<pre><code>cars,12
+roads,5
+traffic,slow
 </code></pre>
 
 <h3>
-<a id="complex-object" class="anchor" href="#complex-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Complex Object</h3>
+<a id="complex-object" class="anchor" href="#complex-object" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Complex Object</h3>
 
 <h4>
-<a id="code-3" class="anchor" href="#code-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h4>
+<a id="code-3" class="anchor" href="#code-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Code</h4>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
 
 <span class="pl-k">var</span> stats <span class="pl-k">=</span> {
     cars<span class="pl-k">:</span> <span class="pl-c1">12</span>,
@@ -188,37 +202,46 @@ traffic;slow
     size<span class="pl-k">:</span> [<span class="pl-c1">10</span>,<span class="pl-c1">20</span>]
 };
 
-jsonexport(stats,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
-    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(csv);
+<span class="pl-en">jsonexport</span>(stats,<span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
+    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(csv);
 });</pre></div>
 
 <h4>
-<a id="result-3" class="anchor" href="#result-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Result</h4>
+<a id="result-3" class="anchor" href="#result-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Result</h4>
 
-<pre><code>cars;12
-roads;5
-traffic;slow
-speed.max;123
-speed.avg;20
-speed.min;5
-size;10,20
+<pre><code>cars,12
+roads,5
+traffic,slow
+speed.max,123
+speed.avg,20
+speed.min,5
+size,10;20
 </code></pre>
 
 <h2>
-<a id="customization" class="anchor" href="#customization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Customization</h2>
+<a id="customization" class="anchor" href="#customization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Customization</h2>
 
 <p>In order to get the most of out of this module, you can customize many parameters and functions.</p>
 
 <h4>
-<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h4>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h4>
 
 <ul>
 <li>
 <code>headerPathString</code> - <code>String</code> Used to create the propriety path, defaults to <code>.</code> example <code>contact: {name: 'example}</code> = <code>contact.name</code>
 </li>
 <li>
-<code>rowDelimiter</code> - <code>String</code> Change the file row delimiter, defaults to <code>,</code> for <strong>cvs format</strong>. <code>\t</code> for <strong>xls format</strong>.</li>
+<code>rowDelimiter</code> - <code>String</code> Change the file row delimiter
+
+<ul>
+<li>Defaults to <code>,</code> (<strong>cvs format</strong>).</li>
+<li>Use <code>\t</code> for <strong>xls format</strong>.</li>
+<li>Use <code>;</code> for (<strong>windows excel .csv format</strong>).</li>
+</ul>
+</li>
+<li>
+<code>textDelimiter</code> - <code>String</code> The character used to escape the text content if needed (default to <code>"</code>)</li>
 <li>
 <code>endOfLine</code> - <code>String</code> Replace the OS default EOL.</li>
 <li>
@@ -233,7 +256,7 @@ size;10,20
 <li>
 <code>includeHeaders</code> - <code>Boolean</code> Set this option to false to hide the CSV headers.</li>
 <li>
-<code>orderHeaders</code> - <code>Boolean</code> By default the most used columns are shown first.</li>
+<code>orderHeaders</code> - <code>Boolean</code> The most used columns are shown first. (defaults to <code>false</code>).</li>
 <li>
 <code>undefinedString</code> - <code>String</code> If you want to display a custom value for undefined strings, use this option. Defaults to <code></code>.</li>
 <li>
@@ -245,39 +268,35 @@ size;10,20
 <li>
 <code>handleBoolean</code> - <code>Function</code> Use this to customize all <code>Booleans</code> in the CSV file.</li>
 <li>
-<code>handleDate</code> - <code>Function</code> Use this to customize all <code>Dates</code> in the CSV file.</li>
-<li>
-<code>handleArray</code> - <code>Function</code> Use this to customize all <code>Arrays</code> in the CSV file.</li>
-<li>
-<code>handleObject</code> - <code>Function</code> Use this to customize all <code>Objects</code> in the CSV file.</li>
+<code>handleDate</code> - <code>Function</code> Use this to customize all <code>Dates</code> in the CSV file. (default to date.toLocaleString)</li>
 </ul>
 
 <h3>
-<a id="handle-customization" class="anchor" href="#handle-customization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Handle Customization</h3>
+<a id="handle-function-option-example" class="anchor" href="#handle-function-option-example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Handle Function Option Example</h3>
 
 <p>Lets say you want to prepend a text to every string in your CSV file, how to do it?</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> jsonexport <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>);
 
 <span class="pl-k">var</span> options <span class="pl-k">=</span> {
-    <span class="pl-en">handleString</span>: <span class="pl-k">function</span>(<span class="pl-smi">string</span>, <span class="pl-smi">name</span>){
+    <span class="pl-en">handleString</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">string</span>, <span class="pl-smi">name</span>){
         <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">'</span>Hey - <span class="pl-pds">'</span></span> <span class="pl-k">+</span> string;
     }
 };
 
-jsonexport({lang<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Node.js<span class="pl-pds">'</span></span>,module<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>}, options, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
-    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>(csv);
+<span class="pl-en">jsonexport</span>({lang<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Node.js<span class="pl-pds">'</span></span>,module<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>jsonexport<span class="pl-pds">'</span></span>}, options, <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">csv</span>){
+    <span class="pl-k">if</span>(err) <span class="pl-k">return</span> <span class="pl-en">console</span>.<span class="pl-c1">log</span>(err);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(csv);
 });</pre></div>
 
 <p>The output would be:</p>
 
-<pre><code>lang;Hey - Node.js
-module;Hey - jsonexport
+<pre><code>lang,Hey - Node.js
+module,Hey - jsonexport
 </code></pre>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/Cnova">Cnova</a></p>
+        <p>This project is maintained by <a href="https://github.com/kauegimenes">kauegimenes</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
