@@ -73,11 +73,11 @@ jsonexport(contacts,function(err, csv){
 #### Result
 
 ```
-name;lastname
-Bob;Smith
-James;David
-Robert;Miller
-David;Martin
+name,lastname
+Bob,Smith
+James,David
+Robert,Miller
+David,Martin
 ```
 
 ### Complex Array
@@ -121,11 +121,11 @@ jsonexport(contacts,function(err, csv){
 #### Result
 
 ```
-lastname;name;family.type;family.name;nickname;location
-Smith;Bob;Father;Peter;;
-David;James;Mother;Julie;;
-Miller;Robert;;;;1231,3214,4214
-Martin;David;;;dmartin;
+lastname,name,family.type,family.name,nickname,location
+Smith,Bob,Father,Peter,,
+David,James,Mother,Julie,,
+Miller,Robert,,,,1231,3214,4214
+Martin,David,,,dmartin,
 ```
 
 ## JSON Object Example
@@ -152,9 +152,9 @@ jsonexport(stats,function(err, csv){
 #### Result
 
 ```
-cars;12
-roads;5
-traffic;slow
+cars,12
+roads,5
+traffic,slow
 ```
 
 ### Complex Object
@@ -185,13 +185,13 @@ jsonexport(stats,function(err, csv){
 #### Result
 
 ```
-cars;12
-roads;5
-traffic;slow
-speed.max;123
-speed.avg;20
-speed.min;5
-size;10,20
+cars,12
+roads,5
+traffic,slow
+speed.max,123
+speed.avg,20
+speed.min,5
+size,10;20
 ```
 
 ## Customization
@@ -242,6 +242,6 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, options, function(err, csv){
 The output would be:
 
 ```
-lang;Hey - Node.js
-module;Hey - jsonexport
+lang,Hey - Node.js
+module,Hey - jsonexport
 ```
