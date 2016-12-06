@@ -16,6 +16,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 Changelog
 ----------------------
+- v1.4.2 - default date handler return date.toLocaleString (jclay)
 - v1.3.2 - fix userOptions optional
 - v1.3.1 - object & array test
 - v1.3.0 - some bug fixes + mocha tests/ + removed options handleArray and handleObject
