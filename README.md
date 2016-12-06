@@ -217,7 +217,7 @@ In order to get the most of out of this module, you can customize many parameter
 - `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
 - `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
 - `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
-- `handleDate` - `Function` Use this to customize all `Dates` in the CSV file.
+- `handleDate` - `Function` Use this to customize all `Dates` in the CSV file. (default to date.toLocaleString)
 
 ### Handle Function Option Example
 
