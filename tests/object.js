@@ -21,9 +21,10 @@ describe('Object', () => {
                 avg: 20,
                 min: 5
             },
-            size: [10,20]
+            size: [10,20],
+            escaped: 'I am a "quoted" field'
         }, {}, (err, csv) => {
-            expect(csv).to.equal('cars,12\nroads,5\ntraffic,slow\nspeed.max,123\nspeed.avg,20\nspeed.min,5\nsize,10;20');
+            expect(csv).to.equal('cars,12\nroads,5\ntraffic,slow\nspeed.max,123\nspeed.avg,20\nspeed.min,5\nsize,10;20\nescaped,I am a ""quoted"" field');
         });
     });
 });

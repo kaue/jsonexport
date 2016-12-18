@@ -9,9 +9,10 @@ describe('Array', () => {
             lastname: 'Smith'
         },{
             name: 'James',
-            lastname: 'David'
+            lastname: 'David',
+            escaped: 'I am a "quoted" field'
         }], {}, (err, csv) => {
-            expect(csv).to.equal('name,lastname\nBob,Smith\nJames,David');
+            expect(csv).to.equal('name,lastname,escaped\nBob,Smith,\nJames,David,I am a ""quoted"" field');
         });
     });
     it('complex', () => {
