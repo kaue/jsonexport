@@ -4,7 +4,8 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var generateHeaders = require('../lib/generateHeaders');
+var escapeDelimiters = require('../lib/escape-delimiters')('"', "\n", "\n");
+var generateHeaders = require('../lib/generate-headers')(escapeDelimiters);
 
 var os = require('os');
 
@@ -14,7 +15,7 @@ describe('generateHeaders', () => {
       expect(generateHeaders.call(null, [])).to.be.empty;
     });
 
-    const mocks = [
+    var mocks = [
       [
         {item: 'firstname', value: 'John'},
         {item: 'name', value: 'Doe'},
@@ -38,4 +39,17 @@ describe('generateHeaders', () => {
       expect(generateHeaders(mocks, true)).to.be.an.array;
       expect(generateHeaders(mocks, true)).to.be.eql(['name', 'firstname']);
     });
+
+    var mocks2 = [
+      [{item:'text "delimited" header'}],
+      [{item: "row \n header"}],
+    ];
+
+    it('should escape headers content', () => {
+      expect(generateHeaders(mocks2)).to.be.an.array;
+      expect(generateHeaders(mocks2)).to.contain('text ""delimited"" header');
+      expect(generateHeaders(mocks2)).to.contain('"row \n header"');
+    });
+
+
 });

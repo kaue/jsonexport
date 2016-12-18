@@ -1,3 +1,7 @@
+/* jshint node:true */
+/* jshint esversion: 6 */
+/* jshint -W030 */
+
 var chai = require('chai');
 var expect = chai.expect;
 var jsonexport = require('../lib/index');

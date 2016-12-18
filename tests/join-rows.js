@@ -4,7 +4,7 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var joinRows = require('../lib/joinRows');
+var joinRows = require('../lib/join-rows');
 
 var os = require('os');
 
