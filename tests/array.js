@@ -21,6 +21,7 @@ describe('Array', () => {
     });
     it('complex', () => {
         jsonexport([{
+           id: 1,
            name: 'Bob',
            lastname: 'Smith',
            family: {
@@ -28,6 +29,7 @@ describe('Array', () => {
                type: 'Father'
            }
         },{
+           id: 2,
            name: 'James',
            lastname: 'David',
            family:{
@@ -35,7 +37,7 @@ describe('Array', () => {
                type: 'Mother'
            }
         }], {}, (err, csv) => {
-            expect(csv).to.equal('name,lastname,family.name,family.type\nBob,Smith,Peter,Father\nJames,David,Julie,Mother');
+            expect(csv).to.equal('id,name,lastname,family.name,family.type\n1,Bob,Smith,Peter,Father\n2,James,David,Julie,Mother');
         });
     });
 });
