@@ -42,6 +42,17 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
     console.log(csv);
 });
 ```
+## Stream
+
+```javascript
+var jsonexport = require('jsonexport');
+let fs = require('fs');
+
+var reader = fs.createReadStream('data.json');
+var writer = fs.createWriteStream('out.csv');
+
+reader.pipe(jsonexport()).pipe(writer);
+```
 
 ## JSON Array Example
 
@@ -200,7 +211,7 @@ size,10;20
 
 In order to get the most of out of this module, you can customize many parameters and functions.
 
-####Options
+#### Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
 - `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
