@@ -9,16 +9,19 @@ var os = require('os');
 var stream = require('stream');
 
 describe('Stream', () => {
-  it('simple', () => {
+  it('simple', (done) => {
     var read = new stream.Readable();
     var write = new stream.Writable();
-
+    var csv = "";
     write._write = function(chunk, enc, next) {
-      var csv = chunk.toString();
-      console.log(csv);
-      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
+      chunk = chunk.toString();
+      csv += chunk;
       next();
     };
+    write.on('finish', () => {
+      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
+      done();
+    });
     read.pipe(jsonexport()).pipe(write);
 
     read.push(JSON.stringify([{
@@ -31,15 +34,19 @@ describe('Stream', () => {
     }]));
     read.push(null);
   });
-  it('simple with options', () => {
+  it('simple with options', (done) => {
     var read = new stream.Readable();
     var write = new stream.Writable();
-
+    var csv = "";
     write._write = function(chunk, enc, next) {
-      var csv = chunk.toString();
-      expect(csv).to.equal(`name|lastname|escaped${os.EOL}Bob|Smith${os.EOL}James|David|I am a ""quoted"" field`);
+      chunk = chunk.toString();
+      csv += chunk;
       next();
     };
+    write.on('finish', () => {
+      expect(csv).to.equal(`name|lastname|escaped${os.EOL}Bob|Smith${os.EOL}James|David|I am a ""quoted"" field`);
+      done();
+    });
 
     read.pipe(jsonexport({
       rowDelimiter: '|'
@@ -55,15 +62,19 @@ describe('Stream', () => {
     }]));
     read.push(null);
   });
-  it('complex', () => {
+  it('complex', (done) => {
     var read = new stream.Readable();
     var write = new stream.Writable();
-
+    var csv = "";
     write._write = function(chunk, enc, next) {
-      var csv = chunk.toString();
-      expect(csv).to.equal(`id,name,lastname,family.name,family.type${os.EOL}1,Bob,Smith,Peter,Father${os.EOL}2,James,David,Julie,Mother`);
+      chunk = chunk.toString();
+      csv += chunk;
       next();
     };
+    write.on('finish', () => {
+      expect(csv).to.equal(`id,name,lastname,family.name,family.type${os.EOL}1,Bob,Smith,Peter,Father${os.EOL}2,James,David,Julie,Mother`);
+      done();
+    });
 
     read.pipe(jsonexport()).pipe(write);
 
