@@ -16,7 +16,7 @@ describe('Stream', () => {
     write._write = function(chunk, enc, next) {
       var csv = chunk.toString();
       console.log(csv);
-      expect(csv).to.equal(`asdname,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
+      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
       next();
     };
     read.pipe(jsonexport()).pipe(write);
