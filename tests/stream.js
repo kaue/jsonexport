@@ -31,6 +31,30 @@ describe('Array', () => {
     }]))
     read.push(null);
   });
+  it('simple with options', () => {
+    let read = new stream.Readable();
+    let write = new stream.Writable();
+
+    write._write = function(chunk, enc, next) {
+      let csv = chunk.toString();
+      expect(csv).to.equal(`name|lastname|escaped${os.EOL}Bob|Smith${os.EOL}James|David|I am a ""quoted"" field`);
+      next();
+    };
+
+    read.pipe(jsonexport({
+      rowDelimiter: '|'
+    })).pipe(write);
+
+    read.push(JSON.stringify([{
+      name: 'Bob',
+      lastname: 'Smith'
+    }, {
+      name: 'James',
+      lastname: 'David',
+      escaped: 'I am a "quoted" field'
+    }]))
+    read.push(null);
+  });
   it('complex', () => {
     let read = new stream.Readable();
     let write = new stream.Writable();
