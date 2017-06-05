@@ -46,7 +46,7 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
 
 ```javascript
 var jsonexport = require('jsonexport');
-let fs = require('fs');
+var fs = require('fs');
 
 var reader = fs.createReadStream('data.json');
 var writer = fs.createWriteStream('out.csv');
