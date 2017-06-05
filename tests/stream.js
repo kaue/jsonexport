@@ -14,7 +14,7 @@ describe('Array', () => {
     var write = new stream.Writable();
 
     write._write = function(chunk, enc, next) {
-      let csv = chunk.toString();
+      var csv = chunk.toString();
       expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
       next();
     };
@@ -36,7 +36,7 @@ describe('Array', () => {
     var write = new stream.Writable();
 
     write._write = function(chunk, enc, next) {
-      let csv = chunk.toString();
+      var csv = chunk.toString();
       expect(csv).to.equal(`name|lastname|escaped${os.EOL}Bob|Smith${os.EOL}James|David|I am a ""quoted"" field`);
       next();
     };
@@ -60,7 +60,7 @@ describe('Array', () => {
     var write = new stream.Writable();
 
     write._write = function(chunk, enc, next) {
-      let csv = chunk.toString();
+      var csv = chunk.toString();
       expect(csv).to.equal(`id,name,lastname,family.name,family.type${os.EOL}1,Bob,Smith,Peter,Father${os.EOL}2,James,David,Julie,Mother`);
       next();
     };
