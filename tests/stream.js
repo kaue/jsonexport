@@ -28,7 +28,7 @@ describe('Array', () => {
       name: 'James',
       lastname: 'David',
       escaped: 'I am a "quoted" field'
-    }]))
+    }]));
     read.push(null);
   });
   it('simple with options', () => {
@@ -52,7 +52,7 @@ describe('Array', () => {
       name: 'James',
       lastname: 'David',
       escaped: 'I am a "quoted" field'
-    }]))
+    }]));
     read.push(null);
   });
   it('complex', () => {
@@ -83,7 +83,7 @@ describe('Array', () => {
         name: 'Julie',
         type: 'Mother'
       }
-    }]))
+    }]));
     read.push(null);
   });
 });
