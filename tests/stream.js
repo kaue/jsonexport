@@ -10,8 +10,8 @@ var stream = require('stream');
 
 describe('Array', () => {
   it('simple', () => {
-    let read = new stream.Readable();
-    let write = new stream.Writable();
+    var read = new stream.Readable();
+    var write = new stream.Writable();
 
     write._write = function(chunk, enc, next) {
       let csv = chunk.toString();
@@ -32,8 +32,8 @@ describe('Array', () => {
     read.push(null);
   });
   it('simple with options', () => {
-    let read = new stream.Readable();
-    let write = new stream.Writable();
+    var read = new stream.Readable();
+    var write = new stream.Writable();
 
     write._write = function(chunk, enc, next) {
       let csv = chunk.toString();
@@ -56,8 +56,8 @@ describe('Array', () => {
     read.push(null);
   });
   it('complex', () => {
-    let read = new stream.Readable();
-    let write = new stream.Writable();
+    var read = new stream.Readable();
+    var write = new stream.Writable();
 
     write._write = function(chunk, enc, next) {
       let csv = chunk.toString();
