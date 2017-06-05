@@ -8,17 +8,17 @@ var jsonexport = require('../lib/index');
 var os = require('os');
 var stream = require('stream');
 
-describe('Array', () => {
+describe('Stream', () => {
   it('simple', () => {
     var read = new stream.Readable();
     var write = new stream.Writable();
 
     write._write = function(chunk, enc, next) {
       var csv = chunk.toString();
-      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
+      console.log(csv);
+      expect(csv).to.equal(`asdname,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
       next();
     };
-
     read.pipe(jsonexport()).pipe(write);
 
     read.push(JSON.stringify([{

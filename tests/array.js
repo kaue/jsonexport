@@ -7,7 +7,7 @@ var expect = chai.expect;
 var jsonexport = require('../lib/index');
 var os = require('os');
 
-describe('Stream', () => {
+describe('Array', () => {
   it('simple', () => {
     jsonexport([{
       name: 'Bob',
