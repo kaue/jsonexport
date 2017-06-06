@@ -1,4 +1,4 @@
-/* jshint node:true */
+/* jshint evil:true */
 /* jshint esversion: 6 */
 /* jshint -W030 */
 
