@@ -18,7 +18,7 @@ describe('Options', () => {
       }
     }], {
       fillGaps: true
-    }, (err, csv) => {      
+    }, (err, csv) => {
       expect(csv).to.equal(`a.b,a.c.d${os.EOL}true,true${os.EOL}true,false`);
     });
   });
