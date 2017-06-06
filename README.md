@@ -214,6 +214,7 @@ In order to get the most of out of this module, you can customize many parameter
 #### Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
+- `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22) 
 - `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
 - `rowDelimiter` - `String` Change the file row delimiter
     - Defaults to `,` (**cvs format**).
