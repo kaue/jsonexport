@@ -1,4 +1,5 @@
-/* jshint evil:true */
+/* jshint evil: true */
+/* jshint ignore: start */
 /* jshint esversion: 6 */
 /* jshint -W030 */
 
