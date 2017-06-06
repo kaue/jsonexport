@@ -4,6 +4,24 @@ var jsonexport = require('../lib/index');
 var os = require('os');
 
 describe('Options', () => {
+  it('rename', () => {
+    jsonexport([{
+      name: 'Bob',
+      lastname: 'Smith',
+      address: {
+        number: 1
+      }
+    }, {
+      name: 'James',
+      lastname: 'David',
+      test: true
+    }], {
+      headers: ['lastname', 'name', 'address.number'],
+      rename: ['Last Name', 'Name', 'Address Number']
+    }, (err, csv) => {
+      expect(csv).to.equal(`Last Name,Name,Address Number,test${os.EOL}Smith,Bob,1${os.EOL}David,James,,true`);
+    });
+  });
   it('fillGaps', () => {
     jsonexport([{
       a: {
