@@ -16,6 +16,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 Changelog
 ----------------------
+- v2.0.4 - rename option
 - v2.0.0 - stream support + new line fix + remove orderHeaders option + new headers option
 - v1.5.0 - escaping content in headers / arrays (papswell)
 - v1.4.2 - default date handler return date.toLocaleString (jclay)
@@ -216,6 +217,7 @@ In order to get the most of out of this module, you can customize many parameter
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
 - `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
 - `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
+- `rename` - `Array` Used to set a custom header text, defaults to `[]` example `['Last Name', 'Name']`
 - `rowDelimiter` - `String` Change the file row delimiter
     - Defaults to `,` (**cvs format**).
     - Use `\t` for **xls format**.
