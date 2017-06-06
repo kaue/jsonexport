@@ -8,7 +8,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM Downloads](https://img.shields.io/npm/dt/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM License](https://img.shields.io/npm/l/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
-
+[![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
 
 This module makes easy to convert JSON to CSV and its very customizable.
 
@@ -214,7 +214,7 @@ In order to get the most of out of this module, you can customize many parameter
 #### Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
-- `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22) 
+- `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
 - `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
 - `rowDelimiter` - `String` Change the file row delimiter
     - Defaults to `,` (**cvs format**).
