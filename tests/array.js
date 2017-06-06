@@ -67,7 +67,6 @@ describe('Array', () => {
         ]
       }
     }], {}, (err, csv) => {
-      console.log(csv);
       expect(csv).to.equal(`a.b,a.c.d,a.e.f${os.EOL}true,1,1${os.EOL},2,2${os.EOL},3,${os.EOL},4,`);
     });
   });
