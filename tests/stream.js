@@ -1,7 +1,5 @@
 /* jshint evil: true */
 /* jshint ignore: start */
-/* jshint esversion: 6 */
-/* jshint -W030 */
 
 var chai = require('chai');
 var expect = chai.expect;
