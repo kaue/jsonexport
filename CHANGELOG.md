@@ -1,0 +1,15 @@
+## Change log
+----------------------
+- v2.0.4 - rename option
+- v2.0.0 - stream support + new line fix + remove orderHeaders option + new headers option
+- v1.5.0 - escaping content in headers / arrays (papswell)
+- v1.4.2 - default date handler return date.toLocaleString (jclay)
+- v1.3.2 - fix userOptions optional
+- v1.3.1 - object & array test
+- v1.3.0 - some bug fixes + mocha tests/ + removed options handleArray and handleObject
+- v1.2.2 - special chars escaping improvement (papswell)
+- v1.2.0 - orderHeaders defaults to false
+- v1.1.2 - Escaping text content if needed (papswell)
+- v1.1.0 - Expose library as CLI (cburgmer)
+- v1.0.7 - Fix for prototyped properties
+- v1.0.6 - Create new lines in the CSV file to handle JSON objects with arrays
