@@ -1,5 +1,14 @@
 # jsonexport
 
+[![Travis](https://travis-ci.org/kauegimenes/jsonexport.svg)](https://travis-ci.org/kauegimenes/jsonexport)
+[![bitHound Overall Score](https://www.bithound.io/github/kauegimenes/jsonexport/badges/score.svg)](https://www.bithound.io/github/kauegimenes/jsonexport)
+[![bitHound Code](https://www.bithound.io/github/kauegimenes/jsonexport/badges/code.svg)](https://www.bithound.io/github/kauegimenes/jsonexport)
+[![Known Vulnerabilities](https://snyk.io/test/npm/jsonexport/badge.svg)](https://snyk.io/test/npm/jsonexport)
+[![NPM Version](http://img.shields.io/npm/v/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
+[![NPM Downloads](https://img.shields.io/npm/dm/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
+[![NPM Downloads](https://img.shields.io/npm/dt/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
+[![NPM License](https://img.shields.io/npm/l/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
+[![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
 
 This module makes easy to convert JSON to CSV and its very customizable.
 
@@ -7,6 +16,9 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 Changelog
 ----------------------
+- v2.0.4 - rename option
+- v2.0.0 - stream support + new line fix + remove orderHeaders option + new headers option
+- v1.5.0 - escaping content in headers / arrays (papswell)
 - v1.4.2 - default date handler return date.toLocaleString (jclay)
 - v1.3.2 - fix userOptions optional
 - v1.3.1 - object & array test
@@ -30,6 +42,17 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
     if(err) return console.log(err);
     console.log(csv);
 });
+```
+## Stream
+
+```javascript
+var jsonexport = require('jsonexport');
+var fs = require('fs');
+
+var reader = fs.createReadStream('data.json');
+var writer = fs.createWriteStream('out.csv');
+
+reader.pipe(jsonexport()).pipe(writer);
 ```
 
 ## JSON Array Example
@@ -189,9 +212,12 @@ size,10;20
 
 In order to get the most of out of this module, you can customize many parameters and functions.
 
-####Options
+#### Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
+- `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
+- `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
+- `rename` - `Array` Used to set a custom header text, defaults to `[]` example `['Last Name', 'Name']`
 - `rowDelimiter` - `String` Change the file row delimiter
     - Defaults to `,` (**cvs format**).
     - Use `\t` for **xls format**.
@@ -203,7 +229,6 @@ In order to get the most of out of this module, you can customize many parameter
 - `booleanTrueString` - `String` Will be used instead of `true`.
 - `booleanFalseString` - `String` Will be used instead of `false`.
 - `includeHeaders` - `Boolean` Set this option to false to hide the CSV headers.
-- `orderHeaders` - `Boolean` The most used columns are shown first. (defaults to `false`).
 - `undefinedString` - `String` If you want to display a custom value for undefined strings, use this option. Defaults to ` `.
 - `verticalOutput` - `Boolean` Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
 - `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
