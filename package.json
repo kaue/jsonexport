@@ -38,9 +38,6 @@
     "url": "https://github.com/kauegimenes/jsonexport/issues"
   },
   "homepage": "https://github.com/kauegimenes/jsonexport",
-  "dependencies": {
-    "underscore": "^1.8.3"
-  },
   "devDependencies": {
     "benchmark": "^2.1.4",
     "chai": "^4.0.1",
