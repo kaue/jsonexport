@@ -7,20 +7,28 @@ var jsonexport = require('../lib/index');
 var os = require('os');
 var stream = require('stream');
 
+function getWriteStream(done) {
+  var write = new stream.Writable();
+  var csv = "";
+  write._write = function(chunk, enc, next) {
+    chunk = chunk.toString();
+    csv += chunk;
+    next();
+  };
+  write.on('finish', () => {
+    done(csv);
+  });
+  return write;
+}
+
 describe('Stream', () => {
   it('simple', (done) => {
     var read = new stream.Readable();
-    var write = new stream.Writable();
-    var csv = "";
-    write._write = function(chunk, enc, next) {
-      chunk = chunk.toString();
-      csv += chunk;
-      next();
-    };
-    write.on('finish', () => {
+    var write = getWriteStream((csv) => {
       expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
       done();
     });
+
     read.pipe(jsonexport()).pipe(write);
 
     read.push(JSON.stringify([{
@@ -35,14 +43,7 @@ describe('Stream', () => {
   });
   it('simple with options', (done) => {
     var read = new stream.Readable();
-    var write = new stream.Writable();
-    var csv = "";
-    write._write = function(chunk, enc, next) {
-      chunk = chunk.toString();
-      csv += chunk;
-      next();
-    };
-    write.on('finish', () => {
+    var write = getWriteStream((csv) => {
       expect(csv).to.equal(`name|lastname|escaped${os.EOL}Bob|Smith${os.EOL}James|David|I am a ""quoted"" field`);
       done();
     });
@@ -63,14 +64,7 @@ describe('Stream', () => {
   });
   it('complex', (done) => {
     var read = new stream.Readable();
-    var write = new stream.Writable();
-    var csv = "";
-    write._write = function(chunk, enc, next) {
-      chunk = chunk.toString();
-      csv += chunk;
-      next();
-    };
-    write.on('finish', () => {
+    var write = getWriteStream((csv) => {
       expect(csv).to.equal(`id,name,lastname,family.name,family.type${os.EOL}1,Bob,Smith,Peter,Father${os.EOL}2,James,David,Julie,Mother`);
       done();
     });
