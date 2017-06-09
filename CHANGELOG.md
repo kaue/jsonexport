@@ -1,5 +1,6 @@
 ## Change log
 ----------------------
+- v2.0.7 - removed underscore as a dependency (dydx)
 - v2.0.4 - rename option
 - v2.0.0 - stream support + new line fix + remove orderHeaders option + new headers option
 - v1.5.0 - escaping content in headers / arrays (papswell)
