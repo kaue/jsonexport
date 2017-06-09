@@ -18,6 +18,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
 # Usage
 
 Installation command is `npm install jsonexport`.
+
 Run tests with `npm test`.
 
 ```javascript
@@ -28,6 +29,13 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
     console.log(csv);
 });
 ```
+
+## CLI
+
+Global installation command is `npm install -g jsonexport`.
+
+Convert JSON to CSV using `cat data.json | jsonexport` or `jsonexport data.json`
+
 ## Stream
 
 ```javascript

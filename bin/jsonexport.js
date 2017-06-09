@@ -1,26 +1,19 @@
 #! /usr/bin/env node
 
-var jsonexport = require('../lib/index.js');
+const jsonexport = require('../lib/index.js');
+const fs = require('fs');
 
-var stdin = process.stdin,
-    inputChunks = [];
+const stdin = process.stdin;
+const stdout = process.stdout;
+
+var filename = process.argv[2];
+
+if (filename)
+  return fs.createReadStream(filename)
+    .pipe(jsonexport())
+    .pipe(stdout);
 
 stdin.setEncoding('utf8');
-
-stdin.on('data', function (chunk) {
-    inputChunks.push(chunk);
-});
-
-stdin.on('end', function () {
-    var input = inputChunks.join(''),
-        parsedData = JSON.parse(input);
-
-    jsonexport(parsedData, function (err, csv) {
-        if (err) {
-            console.error(err);
-            process.exit(1);
-        }
-
-        console.log(csv);
-    });
-});
+stdin
+  .pipe(jsonexport())
+  .pipe(stdout);
