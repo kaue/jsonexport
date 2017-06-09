@@ -36,6 +36,8 @@ Global installation command is `npm install -g jsonexport`.
 
 Convert JSON to CSV using `cat data.json | jsonexport` or `jsonexport data.json`
 
+Usage: `jsonexport <JSON filename> <CSV filename>`
+
 ## Stream
 
 ```javascript
