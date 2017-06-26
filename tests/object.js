@@ -29,7 +29,7 @@ describe('Object', () => {
       size: [10, 20],
       escaped: 'I am a "quoted" field'
     }, {}, (err, csv) => {
-      expect(csv).to.equal(`cars,12${os.EOL}roads,5${os.EOL}traffic,slow${os.EOL}speed.max,123${os.EOL}speed.avg,20${os.EOL}speed.min,5${os.EOL}size,10;20${os.EOL}escaped,I am a ""quoted"" field`);
+      expect(csv).to.equal(`cars,12${os.EOL}roads,5${os.EOL}traffic,slow${os.EOL}speed.max,123${os.EOL}speed.avg,20${os.EOL}speed.min,5${os.EOL}size,10;20${os.EOL}escaped,"I am a ""quoted"" field"`);
     });
   });
 });
