@@ -1,6 +1,6 @@
 {
   "name": "jsonexport",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Makes easy to convert JSON to CSV",
   "main": "./lib",
   "scripts": {
