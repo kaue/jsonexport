@@ -17,7 +17,7 @@ describe('Array', () => {
       lastname: 'David',
       escaped: 'I am a "quoted" field'
     }], {}, (err, csv) => {
-      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
+      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,"I am a ""quoted"" field"`);
     });
   });
   it('complex', () => {

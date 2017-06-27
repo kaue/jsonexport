@@ -25,7 +25,7 @@ describe('Stream', () => {
   it('simple', (done) => {
     var read = new stream.Readable();
     var write = getWriteStream((csv) => {
-      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,I am a ""quoted"" field`);
+      expect(csv).to.equal(`name,lastname,escaped${os.EOL}Bob,Smith${os.EOL}James,David,"I am a ""quoted"" field"`);
       done();
     });
 
@@ -44,7 +44,7 @@ describe('Stream', () => {
   it('simple with options', (done) => {
     var read = new stream.Readable();
     var write = getWriteStream((csv) => {
-      expect(csv).to.equal(`name|lastname|escaped${os.EOL}Bob|Smith${os.EOL}James|David|I am a ""quoted"" field`);
+      expect(csv).to.equal(`name|lastname|escaped${os.EOL}Bob|Smith${os.EOL}James|David|"I am a ""quoted"" field"`);
       done();
     });
 
