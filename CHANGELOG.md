@@ -1,6 +1,6 @@
 ## Change log
 ----------------------
-- v2.0.9 - enclose strings containing quotes with more quotes (dozen1488)
+- v2.0.10 - enclose strings containing quotes with more quotes (dozen1488)
 - v2.0.8 - cli improvements
 - v2.0.7 - removed underscore as a dependency (dydx)
 - v2.0.4 - rename option
