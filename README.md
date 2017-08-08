@@ -130,11 +130,11 @@ jsonexport(contacts,function(err, csv){
 #### Result
 
 ```
-lastname,name,family.type,family.name,nickname,location
-Smith,Bob,Father,Peter,,
-David,James,Mother,Julie,,
-Miller,Robert,,,,1231,3214,4214
-Martin,David,,,dmartin,
+name,lastname,family.name,family.type,family,location,nickname
+Bob,Smith,Peter,Father
+James,David,Julie,Mother
+Robert,Miller,,,,1231;3214;4214
+David,Martin,,,,,dmartin
 ```
 
 ## JSON Object Example
