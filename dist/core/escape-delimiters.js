@@ -10,7 +10,7 @@
 */
 
 module.exports = function escapedDelimiters(textDelimiter, rowDelimiter) {
-  let endOfLine = '\n';
+  var endOfLine = '\n';
 
   if (typeof textDelimiter !== 'string') {
     throw new TypeError('Invalid param "textDelimiter", must be a string.');
@@ -20,17 +20,16 @@ module.exports = function escapedDelimiters(textDelimiter, rowDelimiter) {
     throw new TypeError('Invalid param "rowDelimiter", must be a string.');
   }
 
-  let textDelimiterRegex = new RegExp("\\" + textDelimiter, 'g');
-  let escapedDelimiter = textDelimiter + textDelimiter;
+  var textDelimiterRegex = new RegExp("\\" + textDelimiter, 'g');
+  var escapedDelimiter = textDelimiter + textDelimiter;
 
-  const enclosingCondition = (textDelimiter === '"') ? 
-    (value) => (value.indexOf(rowDelimiter) >= 0 || 
-        value.indexOf(endOfLine) >= 0 ||
-        value.indexOf('"') >= 0)
-    : (value) => (value.indexOf(rowDelimiter) >= 0 || 
-        value.indexOf(endOfLine) >= 0);
+  var enclosingCondition = textDelimiter === '"' ? function (value) {
+    return value.indexOf(rowDelimiter) >= 0 || value.indexOf(endOfLine) >= 0 || value.indexOf('"') >= 0;
+  } : function (value) {
+    return value.indexOf(rowDelimiter) >= 0 || value.indexOf(endOfLine) >= 0;
+  };
 
-  return function(value) {
+  return function (value) {
     if (!value.replace) return value;
     // Escape the textDelimiters contained in the field
     var newValue = value.replace(textDelimiterRegex, escapedDelimiter);

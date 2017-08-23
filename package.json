@@ -5,7 +5,8 @@
   "main": "./lib",
   "scripts": {
     "test": "mocha tests/*.js tests/**/*.js",
-    "lint": "./node_modules/.bin/jshint ./lib/index.js"
+    "lint": "./node_modules/.bin/jshint ./lib/index.js",
+    "build:dist": "babel lib --out-dir dist --presets=es2015"
   },
   "bin": {
     "jsonexport": "bin/jsonexport.js"
@@ -39,6 +40,8 @@
   },
   "homepage": "https://github.com/kauegimenes/jsonexport",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "benchmark": "^2.1.4",
     "chai": "^4.0.1",
     "jshint": "^2.9.4",
