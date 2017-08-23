@@ -1,5 +1,6 @@
 ## Change log
 ----------------------
+- v2.0.11 - Replaced arrow functions in lib code with natural functions to remove dependency on babel
 - v2.0.10 - enclose strings containing quotes with more quotes (dozen1488)
 - v2.0.8 - cli improvements
 - v2.0.7 - removed underscore as a dependency (dydx)
