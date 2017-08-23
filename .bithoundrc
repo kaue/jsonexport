@@ -1,5 +1,8 @@
 {
   "critics": {
       "wc": { "limit": 5000 }
-  }
+  },
+  "ignore": [
+    "**/dist/**"
+  ]
 }
