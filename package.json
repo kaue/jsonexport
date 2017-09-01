@@ -7,7 +7,7 @@
     "test": "mocha tests/*.js tests/**/*.js",
     "lint": "./node_modules/.bin/jshint ./lib/index.js",
     "build:dist": "babel lib --out-dir dist --presets=es2015",
-    "postinstall": "postinstall-build --script build:dist --only-as-dependency"
+    "postinstall": "postinstall-build npm --script build:dist --only-as-dependency"
   },
   "bin": {
     "jsonexport": "bin/jsonexport.js"
