@@ -8,6 +8,9 @@
     "lint": "./node_modules/.bin/jshint ./lib/index.js",
     "build:dist": "babel lib --out-dir dist --presets=es2015"
   },
+  "pre-commit": [
+    "build:dist"
+  ],
   "bin": {
     "jsonexport": "bin/jsonexport.js"
   },
@@ -45,7 +48,8 @@
     "benchmark": "^2.1.4",
     "chai": "^4.0.1",
     "jshint": "^2.9.4",
-    "mocha": "^3.1.0"
+    "mocha": "^3.1.0",
+    "pre-commit": "^1.2.2"
   },
   "runkitExampleFilename": "examples/simple.js"
 }
