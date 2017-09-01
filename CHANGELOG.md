@@ -1,5 +1,6 @@
 ## Change log
 ----------------------
+- v2.0.11 - Tailored for browser by including distribution folder (ackerapple)
 - v2.0.10 - enclose strings containing quotes with more quotes (dozen1488)
 - v2.0.8 - cli improvements
 - v2.0.7 - removed underscore as a dependency (dydx)

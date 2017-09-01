@@ -14,6 +14,18 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 [Project Page](http://kauegimenes.github.io/jsonexport/)
 
+<details>
+  <summary><b>Table of Contents</b></summary>
+
+- [Usage](#usage)
+- [CLI](#cli)
+- [Browser](#browser)
+- [Stream](#stream)
+- [JSON Array Example](#json-array-example)
+- [Customization](#customization)
+
+</details>
+
 
 # Usage
 
@@ -37,6 +49,21 @@ Global installation command is `npm install -g jsonexport`.
 Convert JSON to CSV using `cat data.json | jsonexport` or `jsonexport data.json`
 
 Usage: `jsonexport <JSON filename> <CSV filename>`
+
+## Browser
+Use the code in the folder named **dist** to run jsonexport in the browser
+
+### Browser Import Examples
+
+Webpack
+```javascript
+var jsonexport = require("jsonexport/dist")
+```
+
+Typescript
+```javascript
+import * as jsonexport from "jsonexport/dist"
+```
 
 ## Stream
 
