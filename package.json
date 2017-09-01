@@ -1,12 +1,13 @@
 {
   "name": "jsonexport",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Makes easy to convert JSON to CSV",
   "main": "./lib",
   "scripts": {
     "test": "mocha tests/*.js tests/**/*.js",
     "lint": "./node_modules/.bin/jshint ./lib/index.js",
-    "build:dist": "babel lib --out-dir dist --presets=es2015"
+    "build:dist": "babel lib --out-dir dist --presets=es2015",
+    "prepublish": "npm run build:dist"
   },
   "bin": {
     "jsonexport": "bin/jsonexport.js"
