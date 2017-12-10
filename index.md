@@ -16,25 +16,23 @@ This module makes easy to convert JSON to CSV and its very customizable.
 
 [Online Demo Page](http://kauegimenes.github.io/jsonexport/demo/)
 
-Changelog
-----------------------
-- v2.0.4 - rename option
-- v2.0.0 - stream support + new line fix + remove orderHeaders option + new headers option
-- v1.5.0 - escaping content in headers / arrays (papswell)
-- v1.4.2 - default date handler return date.toLocaleString (jclay)
-- v1.3.2 - fix userOptions optional
-- v1.3.1 - object & array test
-- v1.3.0 - some bug fixes + mocha tests/ + removed options handleArray and handleObject
-- v1.2.2 - special chars escaping improvement (papswell)
-- v1.2.0 - orderHeaders defaults to false
-- v1.1.2 - Escaping text content if needed (papswell)
-- v1.1.0 - Expose library as CLI (cburgmer)
-- v1.0.7 - Fix for prototyped properties
-- v1.0.6 - Create new lines in the CSV file to handle JSON objects with arrays
+<details>
+  <summary><b>Table of Contents</b></summary>
+
+- [Usage](#usage)
+- [CLI](#cli)
+- [Browser](#browser)
+- [Stream](#stream)
+- [JSON Array Example](#json-array-example)
+- [Customization](#customization)
+
+</details>
+
 
 # Usage
 
 Installation command is `npm install jsonexport`.
+
 Run tests with `npm test`.
 
 ```javascript
@@ -45,6 +43,30 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function
     console.log(csv);
 });
 ```
+
+## CLI
+
+Global installation command is `npm install -g jsonexport`.
+
+Convert JSON to CSV using `cat data.json | jsonexport` or `jsonexport data.json`
+
+Usage: `jsonexport <JSON filename> <CSV filename>`
+
+## Browser
+Use the code in the folder named **dist** to run jsonexport in the browser
+
+### Browser Import Examples
+
+Webpack
+```javascript
+var jsonexport = require("jsonexport/dist")
+```
+
+Typescript
+```javascript
+import * as jsonexport from "jsonexport/dist"
+```
+
 ## Stream
 
 ```javascript
@@ -137,11 +159,11 @@ jsonexport(contacts,function(err, csv){
 #### Result
 
 ```
-lastname,name,family.type,family.name,nickname,location
-Smith,Bob,Father,Peter,,
-David,James,Mother,Julie,,
-Miller,Robert,,,,1231,3214,4214
-Martin,David,,,dmartin,
+name,lastname,family.name,family.type,family,location,nickname
+Bob,Smith,Peter,Father
+James,David,Julie,Mother
+Robert,Miller,,,,1231;3214;4214
+David,Martin,,,,,dmartin
 ```
 
 ## JSON Object Example
