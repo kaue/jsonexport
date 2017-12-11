@@ -8,6 +8,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM Downloads](https://img.shields.io/npm/dt/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM License](https://img.shields.io/npm/l/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
+[![GitHub stars](https://img.shields.io/github/stars/kauegimenes/jsonexport.svg)](https://github.com/kauegimenes/jsonexport/stargazers)
 [![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
 
 This module makes easy to convert JSON to CSV and its very customizable.
