@@ -7,6 +7,12 @@ var expect = chai.expect;
 var jsonexport = require('../lib/index');
 var os = require('os');
 
+
+const isRemoteTest = process.env.APPVEYOR || process.env.TRAVIS
+if( isRemoteTest ){
+  console.log('\x1b[34mRemote testing server detected. INFO:'+os.type()+' '+os.platform()+'\x1b[0m')
+}
+
 describe('Object', () => {
   it('simple', () => {
     jsonexport({
