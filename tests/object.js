@@ -10,7 +10,7 @@ var os = require('os');
 
 const isRemoteTest = process.env.APPVEYOR || process.env.TRAVIS
 if( isRemoteTest ){
-  console.log('\x1b[34mRemote testing server detected. INFO:'+os.type()+' '+os.platform()+'\x1b[0m')
+  console.log('\x1b[34mRemote testing server detected on '+os.type()+' '+os.platform()+' '+os.release()+'\x1b[0m')
 }
 
 describe('Object', () => {
