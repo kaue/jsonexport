@@ -48,7 +48,7 @@ describe('Object', () => {
     }];
 
     jsonexport(contacts, (err, csv)=>{
-      expect(csv).to.equal(`name,lastname,status,test\nBob,Smith,,true\nJames,David,fired,true`);
+      expect(csv).to.equal(`name,lastname,status,test${os.EOL}Bob,Smith,,true${os.EOL}James,David,fired,true`);
     });
   });
 
@@ -60,7 +60,7 @@ describe('Object', () => {
     };
 
     jsonexport(contacts, (err, csv)=>{
-      expect(csv).to.equal(`a,another field\nb,\nc,other field`);
+      expect(csv).to.equal(`a,another field${os.EOL}b,${os.EOL}c,other field`);
     });
   });
 });
