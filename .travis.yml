@@ -1,13 +1,4 @@
-matrix:
-    include:
-      - linux
-      - osx
-        language: generic
-      - linux
-        dist: trusty
-        sudo: required
 language: node_js
-
 node_js:
   - "stable"
   - "6"
