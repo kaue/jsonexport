@@ -23,9 +23,14 @@ This module makes easy to convert JSON to CSV and its very customizable.
 - [Usage](#usage)
 - [CLI](#cli)
 - [Browser](#browser)
+  - [Browser Import Examples](#browser-import-examples)
 - [Stream](#stream)
 - [JSON Array Example](#json-array-example)
-- [Customization](#customization)
+  - [Simple Array](#simple-array)
+  - [JSON Object Example](#json-object-example)
+- [Options](#options)
+  - [typeHandlers](#typehandlers)
+- [Contributors](#contributors)
 
 </details>
 
@@ -233,11 +238,9 @@ speed.min,5
 size,10;20
 ```
 
-## Customization
+## Options
 
 In order to get the most of out of this module, you can customize many parameters and functions.
-
-#### Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
 - `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
@@ -256,33 +259,82 @@ In order to get the most of out of this module, you can customize many parameter
 - `includeHeaders` - `Boolean` Set this option to false to hide the CSV headers.
 - `undefinedString` - `String` If you want to display a custom value for undefined strings, use this option. Defaults to ` `.
 - `verticalOutput` - `Boolean` Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
+- `typeHandlers` - `{typeName:(value, index, parent)=>any` A key map of constructors used to match by instance to create a value using the defined function ([see example](#typehandlers))
+
+**Deprecated Options** (Use typeHandlers)
 - `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
 - `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
 - `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
 - `handleDate` - `Function` Use this to customize all `Dates` in the CSV file. (default to date.toLocaleString)
 
-### Handle Function Option Example
 
-Lets say you want to prepend a text to every string in your CSV file, how to do it?
+#### typeHandlers
+Define types by constructors and what function to run when that type is matched
 
 ```javascript
 var jsonexport = require('jsonexport');
 
-var options = {
-    handleString: function(string, name){
-        return 'Hey - ' + string;
-    }
+//data
+var contacts = {
+  'a' : Buffer.from('a2b', 'utf8'),
+  'b' : Buffer.from('other field', 'utf8'),
+  'x' : 22,
+  'z' : function(){return 'bad ace'}
 };
 
-jsonexport({lang: 'Node.js',module: 'jsonexport'}, options, function(err, csv){
-    if(err) return console.log(err);
-    console.log(csv);
+var options={
+  //definitions to type cast
+  typeHandlers:{
+    Array:function(value,index,parent){
+      return 'replaced-array';
+    },
+    Boolean:function(value,index,parent){
+      return 'replaced-boolean';
+    },
+    Function:function(value,index,parent){
+      return value()
+    },
+    Number:function(value,index,parent){
+      return 'replaced-number';
+    },
+    String:function(value,index,parent){
+      return 'replaced-string';
+    },
+    Buffer:function(value,index,parent){
+      return value.toString()
+    }
+  }
+}
+
+jsonexport(contacts, options, function(err, csv){
+  console.log( csv )
 });
 ```
 
 The output would be:
+```
+a,a2b
+b,other field
+x,replaced-number
+z,bad ace
+```
+
+
+When using **typeHandlers**, Do NOT do this
 
 ```
-lang,Hey - Node.js
-module,Hey - jsonexport
+var options={
+  typeHandlers:{
+    Object:function(value,index,parent){
+      return 'EVERYTHING IS AN OBJECT';
+    }
+  }
+}
 ```
+> It is NOT an error, however the recursive result becomes illegable functionality strings
+
+## Contributors
+- [Kauê Gimenes](https://github.com/kauegimenes)
+- [Pierre Guillaume](https://github.com/papswell)
+- [Acker Apple](https://github.com/AckerApple) [![hire me](https://ackerapple.github.io/resume/assets/images/hire-me-badge.svg)](https://ackerapple.github.io/resume/)
+- [And many more...](https://github.com/kauegimenes/jsonexport/graphs/contributors)

@@ -175,7 +175,7 @@ var Parser = function () {
 
           //Call checkType to list all items inside this object
           //Items are returned as a object {item: 'Prop Value, Item Name', value: 'Prop Data Value'}
-          var itemResult = self._handler.check(item, self._options.mainPathItem);
+          var itemResult = self._handler.check(item, self._options.mainPathItem, item, json);
           fillRows(itemResult);
         }
       } catch (err) {
@@ -226,7 +226,7 @@ var Parser = function () {
       for (var prop in json) {
         var prefix = "";
         if (this._options.mainPathItem) prefix = this._options.mainPathItem + this._options.headerPathString;
-        parseResult = this._handler.check(json[prop], prefix + prop);
+        parseResult = this._handler.check(json[prop], prefix + prop, prop, json);
 
         parseResult.forEach(fillRows);
       }

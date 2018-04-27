@@ -1,6 +1,8 @@
 /* jshint node:true */
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12,11 +14,23 @@ var Handler = function () {
     _classCallCheck(this, Handler);
 
     this._options = options;
-    this._options.handleString = this._options.handleString || this._handleString;
-    this._options.handleNumber = this._options.handleNumber || this._handleNumber;
-    this._options.handleBoolean = this._options.handleBoolean || this._handleBoolean;
-    this._options.handleDate = this._options.handleDate || this._handleDate;
+
+    //an object of {typeName:(value,index,parent)=>any}
+    this._options.typeHandlers = this._options.typeHandlers || {};
+
+    //deprecated options
+    this._options.handleString = this._options.handleString ? warnDepOp('handleString', this._options.handleString) : this._handleString;
+    this._options.handleNumber = this._options.handleNumber ? warnDepOp('handleNumber', this._options.handleNumber) : this._handleNumber;
+    this._options.handleBoolean = this._options.handleBoolean ? warnDepOp('handleBoolean', this._options.handleBoolean) : this._handleBoolean;
+    this._options.handleDate = this._options.handleDate ? warnDepOp('handleDate', this._options.handleDate) : this._handleDate;
   }
+
+  /**
+   * Check if results needing mapping to alternate value
+   *
+   * @returns [{item, value}] result
+   */
+
 
   _createClass(Handler, [{
     key: '_setHeaders',
@@ -28,54 +42,40 @@ var Handler = function () {
         return element;
       });
     }
-    /**
-     * Check the element type of the element call the correct handle function
-     *
-     * @param element Element that will be checked
-     * @param item Used to make the headers/path breadcrumb
-     */
-
   }, {
-    key: 'check',
-    value: function check(element, item) {
-      //Check if element is a String
-      if (helper.isString(element)) {
+    key: 'castValue',
+    value: function castValue(element, item, index, parent) {
+      //cast by matching constructor
+      var types = this._options.typeHandlers;
+      for (var type in types) {
+        if (isInstanceOfTypeName(element, type)) {
+          element = types[type].call(types, element, index, parent);
+          break; //first match we move on
+        }
+      }
+
+      return element;
+    }
+  }, {
+    key: 'checkComplex',
+    value: function checkComplex(element, item) {
+      //Check if element is a Date
+      if (helper.isDate(element)) {
         return [{
           item: item,
-          value: this._options.handleString(element, item)
+          value: this._options.handleDate(element, item)
         }];
       }
-      //Check if element is a Number
-      else if (helper.isNumber(element)) {
-          return [{
-            item: item,
-            value: this._options.handleNumber(element, item)
-          }];
+      //Check if element is an Array
+      else if (helper.isArray(element)) {
+          var resultArray = this._handleArray(element, item);
+          return this._setHeaders(resultArray, item);
         }
-        //Check if element is a Boolean
-        else if (helper.isBoolean(element)) {
-            return [{
-              item: item,
-              value: this._options.handleBoolean.bind(this)(element, item)
-            }];
+        //Check if element is a Object
+        else if (helper.isObject(element)) {
+            var resultObject = this._handleObject(element);
+            return this._setHeaders(resultObject, item);
           }
-          //Check if element is a Date
-          else if (helper.isDate(element)) {
-              return [{
-                item: item,
-                value: this._options.handleDate(element, item)
-              }];
-            }
-            //Check if element is an Array
-            else if (helper.isArray(element)) {
-                var resultArray = this._handleArray(element, item);
-                return this._setHeaders(resultArray, item);
-              }
-              //Check if element is a Object
-              else if (helper.isObject(element)) {
-                  var resultObject = this._handleObject(element, item);
-                  return this._setHeaders(resultObject, item);
-                }
 
       return [{
         item: item,
@@ -84,10 +84,47 @@ var Handler = function () {
     }
 
     /**
+     * Check the element type of the element call the correct handle function
+     *
+     * @param element Element that will be checked
+     * @param item Used to make the headers/path breadcrumb
+     * @returns [{item, value}] result
+     */
+
+  }, {
+    key: 'check',
+    value: function check(element, item, index, parent) {
+      element = this.castValue(element, item, index, parent);
+
+      //try simple value by highier performance switch
+      switch (typeof element === 'undefined' ? 'undefined' : _typeof(element)) {
+        case 'string':
+          return [{
+            item: item,
+            value: this._options.handleString(element, item)
+          }];
+
+        case 'number':
+          return [{
+            item: item,
+            value: this._options.handleNumber(element, item)
+          }];
+
+        case 'boolean':
+          return [{
+            item: item,
+            value: this._options.handleBoolean.bind(this)(element, item)
+          }];
+      }
+
+      return this.checkComplex(element, item);
+    }
+
+    /**
      * Handle all Objects
      *
      * @param {Object} obj
-     * @returns {Array} result
+     * @returns [{item, value}] result
      */
 
   }, {
@@ -98,17 +135,18 @@ var Handler = function () {
       for (var prop in obj) {
         var propData = obj[prop];
         //Check the propData type
-        var resultCheckType = this.check(propData, prop);
-        //Append to results
+        var resultCheckType = this.check(propData, prop, prop, obj);
+        //Append to results aka merge results aka array-append-array
         result = result.concat(resultCheckType);
       }
       return result;
     }
+
     /**
      * Handle all Arrays, merges arrays with primitive types in a single value
      *
      * @param {Array} array
-     * @returns {Array} result
+     * @returns [{item, value}] result
      */
 
   }, {
@@ -117,43 +155,22 @@ var Handler = function () {
       var self = this;
       var result = [];
       var firstElementWithoutItem;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = array[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var element = _step.value;
-
-          //Check the propData type
-          var resultCheckType = self.check(element);
-          //Check for results without itens, merge all itens with the first occurrence
-          if (resultCheckType.length === 0) continue;
-          var firstResult = resultCheckType[0];
-          if (!firstResult.item && firstElementWithoutItem !== undefined) {
-            firstElementWithoutItem.value += self._options.arrayPathString + firstResult.value;
-            continue;
-          } else if (resultCheckType.length > 0 && !firstResult.item && firstElementWithoutItem === undefined) {
-            firstElementWithoutItem = firstResult;
-          }
-          //Append to results
-          result = result.concat(resultCheckType);
+      for (var aIndex = 0; aIndex < array.length; ++aIndex) {
+        var element = array[aIndex];
+        //Check the propData type
+        var resultCheckType = self.check(element, null, aIndex, array);
+        //Check for results without itens, merge all itens with the first occurrence
+        if (resultCheckType.length === 0) continue;
+        var firstResult = resultCheckType[0];
+        if (!firstResult.item && firstElementWithoutItem !== undefined) {
+          firstElementWithoutItem.value += self._options.arrayPathString + firstResult.value;
+          continue;
+        } else if (resultCheckType.length > 0 && !firstResult.item && firstElementWithoutItem === undefined) {
+          firstElementWithoutItem = firstResult;
         }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        //Append to results
+        result = result.concat(resultCheckType);
       }
-
       return result;
     }
     /**
@@ -217,3 +234,27 @@ var Handler = function () {
 }();
 
 module.exports = Handler;
+
+function warnDepOp(optionName, backOut) {
+  console.warn("[jsonexport]: option " + optionName + " has been deprecated. Use option.typeHandlers");
+  return backOut;
+}
+
+var globalScope = typeof window === "undefined" ? global : window;
+function isInstanceOfTypeName(element, typeName) {
+  if (element instanceof globalScope[typeName]) {
+    return true; //Buffer and complex objects
+  }
+
+  //literals in javascript cannot be checked by instance of
+  switch (typeof element === 'undefined' ? 'undefined' : _typeof(element)) {
+    case 'string':
+      return typeName === "String";
+    case 'boolean':
+      return typeName === "Boolean";
+    case 'number':
+      return typeName === "Number";
+  }
+
+  return false;
+}
