@@ -85,16 +85,16 @@ describe('Object', () => {
         type:Buffer,
         each:function(value,index,parent){
           if(parent===contacts){
-            return 'parentless-'+index
+            return 'parentless-'+index;
           }
           
-          return value.toString()
+          return value.toString();
         }
       }]
-    }
+    };
 
     jsonexport(contacts, options, (err, csv)=>{
       expect(csv).to.equal(`a,parentless-a${os.EOL}b,${os.EOL}c,${os.EOL}d.x,other field`);
     });
-  })
+  });
 });

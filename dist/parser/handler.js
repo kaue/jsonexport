@@ -95,7 +95,7 @@ var Handler = function () {
         }
         //Check if element is a Object
         else if (helper.isObject(element)) {
-            var resultObject = this._handleObject(element); //this._options.handleObject(element, item, () => this._handleObject.apply(this, arguments));
+            var resultObject = this._handleObject(element);
             return this._setHeaders(resultObject, item);
           }
 
