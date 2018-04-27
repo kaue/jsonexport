@@ -74,6 +74,7 @@ describe('Object', () => {
     var contacts = {
       '0' : true,
       '1' : [11,22,33],
+      '2' : ()=>'bad ace',
       'a' : Buffer.from('a2b', 'utf8'),
       'b' : 'x',
       'c' : 99,
@@ -89,6 +90,9 @@ describe('Object', () => {
         },
         Boolean:function(value,index,parent){
           return 'replaced-boolean';
+        },
+        Function:function(value,index,parent){
+          return value()
         },
         Number:function(value,index,parent){
           return 'replaced-number';
@@ -107,7 +111,7 @@ describe('Object', () => {
     };
 
     jsonexport(contacts, options, (err, csv)=>{
-      expect(csv).to.equal(`0,replaced-boolean${os.EOL}1,replaced-array${os.EOL}a,parentless-a${os.EOL}b,replaced-string${os.EOL}c,replaced-number${os.EOL}d.x,other field`);
+      expect(csv).to.equal(`0,replaced-boolean${os.EOL}1,replaced-array${os.EOL}2,bad ace${os.EOL}a,parentless-a${os.EOL}b,replaced-string${os.EOL}c,replaced-number${os.EOL}d.x,other field`);
     });
   });
 });

@@ -30,6 +30,7 @@ This module makes easy to convert JSON to CSV and its very customizable.
   - [JSON Object Example](#json-object-example)
 - [Options](#options)
   - [typeHandlers](#typehandlers)
+- [Contributors](#contributors)
 
 </details>
 
@@ -277,7 +278,8 @@ var jsonexport = require('jsonexport');
 var contacts = {
   'a' : Buffer.from('a2b', 'utf8'),
   'b' : Buffer.from('other field', 'utf8'),
-  'z' : 22
+  'x' : 22,
+  'z' : function(){return 'bad ace'}
 };
 
 var options={
@@ -288,6 +290,9 @@ var options={
     },
     Boolean:function(value,index,parent){
       return 'replaced-boolean';
+    },
+    Function:function(value,index,parent){
+      return value()
     },
     Number:function(value,index,parent){
       return 'replaced-number';
@@ -310,5 +315,26 @@ The output would be:
 ```
 a,a2b
 b,other field
-z,replaced-number
+x,replaced-number
+z,bad ace
 ```
+
+
+When using **typeHandlers**, Do NOT do this
+
+```
+var options={
+  typeHandlers:{
+    Object:function(value,index,parent){
+      return 'EVERYTHING IS AN OBJECT';
+    }
+  }
+}
+```
+> It is NOT an error, however the recursive result becomes illegable functionality strings
+
+## Contributors
+- [Kauê Gimenes](https://github.com/kauegimenes)
+- [Pierre Guillaume](https://github.com/papswell)
+- [Acker Apple](https://github.com/AckerApple) [![hire me](https://ackerapple.github.io/resume/assets/images/hire-me-badge.svg)](https://ackerapple.github.io/resume/)
+- [And many more...](https://github.com/kauegimenes/jsonexport/graphs/contributors)
