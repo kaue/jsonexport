@@ -14,12 +14,15 @@ var Handler = function () {
     _classCallCheck(this, Handler);
 
     this._options = options;
-    this._options.handleString = this._options.handleString || this._handleString;
-    this._options.handleNumber = this._options.handleNumber || this._handleNumber;
-    this._options.handleBoolean = this._options.handleBoolean || this._handleBoolean;
-    this._options.handleDate = this._options.handleDate || this._handleDate;
-    //an array of {type:constructor, each:(value,index,parent)=>any}
-    this._options.handleCustoms = this._options.handleCustoms || [];
+
+    //an object of {typeName:(value,index,parent)=>any}
+    this._options.typeHandlers = this._options.typeHandlers || {};
+
+    //deprecated options
+    this._options.handleString = this._options.handleString ? warnDepOp('handleString', this._options.handleString) : this._handleString;
+    this._options.handleNumber = this._options.handleNumber ? warnDepOp('handleNumber', this._options.handleNumber) : this._handleNumber;
+    this._options.handleBoolean = this._options.handleBoolean ? warnDepOp('handleBoolean', this._options.handleBoolean) : this._handleBoolean;
+    this._options.handleDate = this._options.handleDate ? warnDepOp('handleDate', this._options.handleDate) : this._handleDate;
   }
 
   /**
@@ -52,10 +55,10 @@ var Handler = function () {
     key: 'check',
     value: function check(element, item, index, parent) {
       //cast by matching constructor
-      for (var hcIndex = 0; hcIndex < this._options.handleCustoms.length; ++hcIndex) {
-        var custom = this._options.handleCustoms[hcIndex];
-        if (element !== null && custom.type === element.constructor) {
-          element = custom.each(element, index, parent);
+      var types = this._options.typeHandlers;
+      for (var type in types) {
+        if (isInstanceOfTypeName(element, type)) {
+          element = types[type].call(types, element, index, parent);
           break; //first match we move on
         }
       }
@@ -219,3 +222,27 @@ var Handler = function () {
 }();
 
 module.exports = Handler;
+
+function warnDepOp(optionName, backOut) {
+  console.warn("[jsonexport]: option " + optionName + " has been deprecated. Use option.typeHandlers");
+  return backOut;
+}
+
+var globalScope = typeof window === "undefined" ? global : window;
+function isInstanceOfTypeName(element, typeName) {
+  if (element instanceof globalScope[typeName]) {
+    return true; //Buffer and complex objects
+  }
+
+  //literals in javascript cannot be checked by instance of
+  switch (typeof element === 'undefined' ? 'undefined' : _typeof(element)) {
+    case 'string':
+      return typeName === "String";
+    case 'boolean':
+      return typeName === "Boolean";
+    case 'number':
+      return typeName === "Number";
+  }
+
+  return false;
+}
