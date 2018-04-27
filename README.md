@@ -23,11 +23,13 @@ This module makes easy to convert JSON to CSV and its very customizable.
 - [Usage](#usage)
 - [CLI](#cli)
 - [Browser](#browser)
+  - [Browser Import Examples](#browser-import-examples)
 - [Stream](#stream)
 - [JSON Array Example](#json-array-example)
-- [Customization](#customization)
-  - [handleCustoms](#handlecustoms)
-  - [Handle Function Option Example](#handle-function-option-example)
+  - [Simple Array](#simple-array)
+  - [JSON Object Example](#json-object-example)
+- [Options](#options)
+  - [typeHandlers](#typehandlers)
 
 </details>
 
@@ -235,11 +237,9 @@ speed.min,5
 size,10;20
 ```
 
-## Customization
+## Options
 
 In order to get the most of out of this module, you can customize many parameters and functions.
-
-### Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
 - `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
@@ -258,34 +258,47 @@ In order to get the most of out of this module, you can customize many parameter
 - `includeHeaders` - `Boolean` Set this option to false to hide the CSV headers.
 - `undefinedString` - `String` If you want to display a custom value for undefined strings, use this option. Defaults to ` `.
 - `verticalOutput` - `Boolean` Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
+- `typeHandlers` - `{typeName:(value, index, parent)=>any` A key map of constructors used to match by instance to create a value using the defined function ([see example](#typehandlers))
+
+**Deprecated Options** (Use typeHandlers)
 - `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
 - `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
 - `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
 - `handleDate` - `Function` Use this to customize all `Dates` in the CSV file. (default to date.toLocaleString)
-- `handleCustoms` - `[{type:constructor, each:(value, index, parent)=>any}]` Use this to define an array of constructors to match by to convert by the each function ([see example](#handlecustoms))
 
-#### handleCustoms
-Define types by constructors and what function to run when that type is encountered
+
+#### typeHandlers
+Define types by constructors and what function to run when that type is matched
 
 ```javascript
 var jsonexport = require('jsonexport');
 
-//definitions to type cast
-var customs = [{
-  type:Buffer,
-  each:function(value,index,parent){
-    return value.toString()
-  }
-}]
-
 //data
 var contacts = {
   'a' : Buffer.from('a2b', 'utf8'),
-  'b' : Buffer.from('other field', 'utf8')
+  'b' : Buffer.from('other field', 'utf8'),
+  'z' : 22
 };
 
 var options={
-  handleCustoms:customs
+  //definitions to type cast
+  typeHandlers:{
+    Array:function(value,index,parent){
+      return 'replaced-array';
+    },
+    Boolean:function(value,index,parent){
+      return 'replaced-boolean';
+    },
+    Number:function(value,index,parent){
+      return 'replaced-number';
+    },
+    String:function(value,index,parent){
+      return 'replaced-string';
+    },
+    Buffer:function(value,index,parent){
+      return value.toString()
+    }
+  }
 }
 
 jsonexport(contacts, options, function(err, csv){
@@ -297,29 +310,5 @@ The output would be:
 ```
 a,a2b
 b,other field
-```
-
-#### Handle Function Option Example
-
-Lets say you want to prepend a text to every string in your CSV file, how to do it?
-
-```javascript
-var jsonexport = require('jsonexport');
-
-var options = {
-    handleString: function(string, name){
-        return 'Hey - ' + string;
-    }
-};
-
-jsonexport({lang: 'Node.js',module: 'jsonexport'}, options, function(err, csv){
-    if(err) return console.log(err);
-    console.log(csv);
-});
-```
-
-The output would be:
-```
-lang,Hey - Node.js
-module,Hey - jsonexport
+z,replaced-number
 ```

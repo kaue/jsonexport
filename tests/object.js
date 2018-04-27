@@ -72,29 +72,42 @@ describe('Object', () => {
 
   it('Buffer to String - Github #48',()=>{
     var contacts = {
+      '0' : true,
+      '1' : [11,22,33],
       'a' : Buffer.from('a2b', 'utf8'),
-      'b' : '',
-      'c' : null,
+      'b' : 'x',
+      'c' : 99,
       'd' : {
         x:Buffer.from('other field', 'utf8')
       }
     };
 
     var options={
-      handleCustoms:[{
-        type:Buffer,
-        each:function(value,index,parent){
+      typeHandlers:{
+        Array:function(value,index,parent){
+          return 'replaced-array';
+        },
+        Boolean:function(value,index,parent){
+          return 'replaced-boolean';
+        },
+        Number:function(value,index,parent){
+          return 'replaced-number';
+        },
+        String:function(value,index,parent){
+          return 'replaced-string';
+        },
+        Buffer:function(value,index,parent){
           if(parent===contacts){
             return 'parentless-'+index;
           }
           
           return value.toString();
         }
-      }]
+      }
     };
 
     jsonexport(contacts, options, (err, csv)=>{
-      expect(csv).to.equal(`a,parentless-a${os.EOL}b,${os.EOL}c,${os.EOL}d.x,other field`);
+      expect(csv).to.equal(`0,replaced-boolean${os.EOL}1,replaced-array${os.EOL}a,parentless-a${os.EOL}b,replaced-string${os.EOL}c,replaced-number${os.EOL}d.x,other field`);
     });
   });
 });
