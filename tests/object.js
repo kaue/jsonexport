@@ -92,7 +92,7 @@ describe('Object', () => {
           return 'replaced-boolean';
         },
         Function:function(value,index,parent){
-          return value()
+          return value();
         },
         Number:function(value,index,parent){
           return 'replaced-number';
