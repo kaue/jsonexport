@@ -8,9 +8,9 @@ var jsonexport = require('../lib/index');
 var os = require('os');
 
 
-const isRemoteTest = process.env.APPVEYOR || process.env.TRAVIS
+const isRemoteTest = process.env.APPVEYOR || process.env.TRAVIS;
 if( isRemoteTest ){
-  console.log('\x1b[34mRemote testing server detected on '+os.type()+' '+os.platform()+' '+os.release()+'\x1b[0m')
+  console.log('\x1b[34mRemote testing server detected on '+os.type()+' '+os.platform()+' '+os.release()+'\x1b[0m');
 }
 
 describe('Object', () => {
@@ -40,7 +40,7 @@ describe('Object', () => {
     });
   });
 
-  it('Github Issue #41 p1',()=>{
+  it('Github #41 p1',()=>{
     var contacts = [{
         name: 'Bob',
         lastname: 'Smith',
@@ -58,7 +58,7 @@ describe('Object', () => {
     });
   });
 
-  it('Github Issue #41 p2',()=>{
+  it('Github #41 p2',()=>{
     var contacts = {
       'a' : 'another field',
       'b' : '',
@@ -69,4 +69,32 @@ describe('Object', () => {
       expect(csv).to.equal(`a,another field${os.EOL}b,${os.EOL}c,other field`);
     });
   });
+
+  it('Buffer to String - Github #48',()=>{
+    var contacts = {
+      'a' : Buffer.from('a2b', 'utf8'),
+      'b' : '',
+      'c' : null,
+      'd' : {
+        x:Buffer.from('other field', 'utf8')
+      }
+    };
+
+    var options={
+      handleCustoms:[{
+        type:Buffer,
+        each:function(value,index,parent){
+          if(parent===contacts){
+            return 'parentless-'+index
+          }
+          
+          return value.toString()
+        }
+      }]
+    }
+
+    jsonexport(contacts, options, (err, csv)=>{
+      expect(csv).to.equal(`a,parentless-a${os.EOL}b,${os.EOL}c,${os.EOL}d.x,other field`);
+    });
+  })
 });

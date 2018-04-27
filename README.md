@@ -26,6 +26,8 @@ This module makes easy to convert JSON to CSV and its very customizable.
 - [Stream](#stream)
 - [JSON Array Example](#json-array-example)
 - [Customization](#customization)
+  - [handleCustoms](#handlecustoms)
+  - [Handle Function Option Example](#handle-function-option-example)
 
 </details>
 
@@ -237,7 +239,7 @@ size,10;20
 
 In order to get the most of out of this module, you can customize many parameters and functions.
 
-#### Options
+### Options
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
 - `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
@@ -260,8 +262,44 @@ In order to get the most of out of this module, you can customize many parameter
 - `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
 - `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
 - `handleDate` - `Function` Use this to customize all `Dates` in the CSV file. (default to date.toLocaleString)
+- `handleCustoms` - `[{type:constructor, each:(value, index, parent)=>any}]` Use this to define an array of constructors to match by to convert by the each function ([see example](#handlecustoms))
 
-### Handle Function Option Example
+#### handleCustoms
+Define types by constructors and what function to run when that type is encountered
+
+```javascript
+var jsonexport = require('jsonexport');
+
+//definitions to type cast
+var customs = [{
+  type:Buffer,
+  each:function(value,index,parent){
+    return value.toString()
+  }
+}]
+
+//data
+var contacts = {
+  'a' : Buffer.from('a2b', 'utf8'),
+  'b' : Buffer.from('other field', 'utf8')
+};
+
+var options={
+  handleCustoms:customs
+}
+
+jsonexport(contacts, options, function(err, csv){
+  console.log( csv )
+});
+```
+
+The output would be:
+```
+a,a2b
+b,other field
+```
+
+#### Handle Function Option Example
 
 Lets say you want to prepend a text to every string in your CSV file, how to do it?
 
@@ -281,7 +319,6 @@ jsonexport({lang: 'Node.js',module: 'jsonexport'}, options, function(err, csv){
 ```
 
 The output would be:
-
 ```
 lang,Hey - Node.js
 module,Hey - jsonexport
