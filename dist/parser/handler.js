@@ -42,18 +42,9 @@ var Handler = function () {
         return element;
       });
     }
-
-    /**
-     * Check the element type of the element call the correct handle function
-     *
-     * @param element Element that will be checked
-     * @param item Used to make the headers/path breadcrumb
-     * @returns [{item, value}] result
-     */
-
   }, {
-    key: 'check',
-    value: function check(element, item, index, parent) {
+    key: 'castValue',
+    value: function castValue(element, item, index, parent) {
       //cast by matching constructor
       var types = this._options.typeHandlers;
       for (var type in types) {
@@ -63,27 +54,11 @@ var Handler = function () {
         }
       }
 
-      //try simple value by highier performance switch
-      switch (typeof element === 'undefined' ? 'undefined' : _typeof(element)) {
-        case 'string':
-          return [{
-            item: item,
-            value: this._options.handleString(element, item)
-          }];
-
-        case 'number':
-          return [{
-            item: item,
-            value: this._options.handleNumber(element, item)
-          }];
-
-        case 'boolean':
-          return [{
-            item: item,
-            value: this._options.handleBoolean.bind(this)(element, item)
-          }];
-      }
-
+      return element;
+    }
+  }, {
+    key: 'checkComplex',
+    value: function checkComplex(element, item) {
       //Check if element is a Date
       if (helper.isDate(element)) {
         return [{
@@ -106,6 +81,43 @@ var Handler = function () {
         item: item,
         value: ''
       }];
+    }
+
+    /**
+     * Check the element type of the element call the correct handle function
+     *
+     * @param element Element that will be checked
+     * @param item Used to make the headers/path breadcrumb
+     * @returns [{item, value}] result
+     */
+
+  }, {
+    key: 'check',
+    value: function check(element, item, index, parent) {
+      element = this.castValue(element, item, index, parent);
+
+      //try simple value by highier performance switch
+      switch (typeof element === 'undefined' ? 'undefined' : _typeof(element)) {
+        case 'string':
+          return [{
+            item: item,
+            value: this._options.handleString(element, item)
+          }];
+
+        case 'number':
+          return [{
+            item: item,
+            value: this._options.handleNumber(element, item)
+          }];
+
+        case 'boolean':
+          return [{
+            item: item,
+            value: this._options.handleBoolean.bind(this)(element, item)
+          }];
+      }
+
+      return this.checkComplex(element, item);
     }
 
     /**
