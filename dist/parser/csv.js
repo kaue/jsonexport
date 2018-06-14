@@ -9,8 +9,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var os = require('os');
-var Transform = require('stream').Transform;
+var EOL = require('../core/eol');
 var joinRows = require('../core/join-rows');
 var Handler = require('./handler');
 var helper = require('../core/helper');
@@ -247,25 +246,25 @@ var Parser = function () {
     key: '_parseOptions',
     value: function _parseOptions(userOptions) {
       var defaultOptions = {
-        headers: [], //                  Array
-        rename: [], //                   Array
-        headerPathString: '.', //       String
-        rowDelimiter: ',', //           String
-        textDelimiter: '"', //          String
-        arrayPathString: ';', //        String
-        undefinedString: '', //         String
-        endOfLine: os.EOL || '\n', //   String
-        mainPathItem: null, //          String
-        booleanTrueString: null, //     String
-        booleanFalseString: null, //    String
-        includeHeaders: true, //        Boolean
-        fillGaps: false, //             Boolean
-        verticalOutput: true, //        Boolean
+        headers: [], //              Array
+        rename: [], //               Array
+        headerPathString: '.', //    String
+        rowDelimiter: ',', //        String
+        textDelimiter: '"', //       String
+        arrayPathString: ';', //     String
+        undefinedString: '', //      String
+        endOfLine: EOL || '\n', //   String
+        mainPathItem: null, //       String
+        booleanTrueString: null, //  String
+        booleanFalseString: null, // String
+        includeHeaders: true, //     Boolean
+        fillGaps: false, //          Boolean
+        verticalOutput: true, //     Boolean
         //Handlers
-        handleString: undefined, //          Function
-        handleNumber: undefined, //          Function
-        handleBoolean: undefined, //        Function
-        handleDate: undefined //              Function
+        handleString: undefined, //  Function
+        handleNumber: undefined, //  Function
+        handleBoolean: undefined, // Function
+        handleDate: undefined //    Function
       };
       return Object.assign({}, defaultOptions, userOptions);
     }

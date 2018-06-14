@@ -1,5 +1,12 @@
 ## Change log
 ----------------------
+- v2.2.0 - Better browser distribution
+  - Browser based files in dist are overwritten for best browser building
+  - Found unused code and removed
+  - Updated all depencies
+    - Some had minor version changes
+    - This package now changes its minor from 2.1 to 2.2
+    - Added npm-run-all to safely run npm muli commands across all operating systems
 - v2.0.11 - Tailored for browser by including distribution folder (ackerapple)
 - v2.0.10 - enclose strings containing quotes with more quotes (dozen1488)
 - v2.0.8 - cli improvements
