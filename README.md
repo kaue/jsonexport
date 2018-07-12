@@ -251,6 +251,7 @@ In order to get the most of out of this module, you can customize many parameter
     - Use `\t` for **xls format**.
     - Use `;` for (**windows excel .csv format**).
 - `textDelimiter` - `String` The character used to escape the text content if needed (default to `"`)
+- `forceTextDelim` - `Boolean` Set this option to true to wrap every data item and header in the textDelimiter. Defaults to `"`
 - `endOfLine` - `String` Replace the OS default EOL.
 - `mainPathItem` - `String` Every header will have the `mainPathItem` as the base.
 - `arrayPathString` - `String` This is used to output primitive arrays in a single column, defaults to `;`
