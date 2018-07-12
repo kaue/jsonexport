@@ -21,7 +21,7 @@ var Parser = function () {
     this._options = this._parseOptions(options) || {};
     this._handler = new Handler(this._options);
     this._headers = this._options.headers || [];
-    this._escape = require('../core/escape-delimiters')(this._options.textDelimiter, this._options.rowDelimiter);
+    this._escape = require('../core/escape-delimiters')(this._options.textDelimiter, this._options.rowDelimiter, this._options.forceTextDelimiter);
   }
 
   /**
@@ -260,6 +260,7 @@ var Parser = function () {
         includeHeaders: true, //     Boolean
         fillGaps: false, //          Boolean
         verticalOutput: true, //     Boolean
+        forceTextDelimiter: false, //Boolean
         //Handlers
         handleString: undefined, //  Function
         handleNumber: undefined, //  Function
@@ -274,9 +275,17 @@ var Parser = function () {
       var _this = this;
 
       var headers = this._headers;
+
       if (this._options.rename && this._options.rename.length > 0) headers = headers.map(function (header) {
         return _this._options.rename[_this._options.headers.indexOf(header)] || header;
       });
+
+      if (this._options.forceTextDelimiter) {
+        headers = headers.map(function (header) {
+          return '' + _this._options.textDelimiter + header + _this._options.textDelimiter;
+        });
+      }
+
       return headers.join(this._options.rowDelimiter);
     }
   }]);

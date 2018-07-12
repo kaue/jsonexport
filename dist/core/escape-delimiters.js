@@ -9,7 +9,7 @@
    For example: "aaa","b""bb","ccc"
 */
 
-module.exports = function escapedDelimiters(textDelimiter, rowDelimiter) {
+module.exports = function escapedDelimiters(textDelimiter, rowDelimiter, forceTextDelimiter) {
   var endOfLine = '\n';
 
   if (typeof textDelimiter !== 'string') {
@@ -30,14 +30,17 @@ module.exports = function escapedDelimiters(textDelimiter, rowDelimiter) {
   };
 
   return function (value) {
+    if (forceTextDelimiter) value = "" + value;
+
     if (!value.replace) return value;
     // Escape the textDelimiters contained in the field
-    var newValue = value.replace(textDelimiterRegex, escapedDelimiter);
+    value = value.replace(textDelimiterRegex, escapedDelimiter);
+
     // Escape the whole field if it contains a rowDelimiter or a linebreak or double quote
-    if (enclosingCondition(value)) {
-      newValue = textDelimiter + newValue + textDelimiter;
+    if (forceTextDelimiter || enclosingCondition(value)) {
+      value = textDelimiter + value + textDelimiter;
     }
 
-    return newValue;
+    return value;
   };
 };

@@ -251,6 +251,7 @@ In order to get the most of out of this module, you can customize many parameter
     - Use `\t` for **xls format**.
     - Use `;` for (**windows excel .csv format**).
 - `textDelimiter` - `String` The character used to escape the text content if needed (default to `"`)
+- `forceTextDelimiter` - `Boolean` Set this option to true to wrap every data item and header in the textDelimiter. Defaults to `false`
 - `endOfLine` - `String` Replace the OS default EOL.
 - `mainPathItem` - `String` Every header will have the `mainPathItem` as the base.
 - `arrayPathString` - `String` This is used to output primitive arrays in a single column, defaults to `;`
@@ -337,4 +338,5 @@ var options={
 - [Kauê Gimenes](https://github.com/kauegimenes)
 - [Pierre Guillaume](https://github.com/papswell)
 - [Acker Apple](https://github.com/AckerApple) [![hire me](https://ackerapple.github.io/resume/assets/images/hire-me-badge.svg)](https://ackerapple.github.io/resume/)
+- [Victor Hahn](https://github.com/rv-vhahn)
 - [And many more...](https://github.com/kauegimenes/jsonexport/graphs/contributors)
