@@ -338,4 +338,5 @@ var options={
 - [Kauê Gimenes](https://github.com/kauegimenes)
 - [Pierre Guillaume](https://github.com/papswell)
 - [Acker Apple](https://github.com/AckerApple) [![hire me](https://ackerapple.github.io/resume/assets/images/hire-me-badge.svg)](https://ackerapple.github.io/resume/)
+- [Victor Hahn](https://github.com/rv-vhahn)
 - [And many more...](https://github.com/kauegimenes/jsonexport/graphs/contributors)
