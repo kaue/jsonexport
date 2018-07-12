@@ -38,7 +38,7 @@ describe('escapeDelimiters', () => {
   });
 
   it('should escape if forceTextDelimiter flag is true', () => {
-    let escapeDelimiters = require('../lib/core/escape-delimiters')('"', '\n', true);
+    var escapeDelimiters = require('../lib/core/escape-delimiters')('"', '\n', false);
 
     expect(escapeDelimiters(mocks.forceEscape)).to.be.a.string;
     expect(escapeDelimiters(mocks.forceEscape)).to.be.equal('"42"');
