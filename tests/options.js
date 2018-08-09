@@ -40,6 +40,16 @@ describe('Options', () => {
       expect(csv).to.equal(`a.b,a.c.d${os.EOL}true,true${os.EOL}true,false`);
     });
   });
+  it('mapHeaders', () => {
+    jsonexport([{
+      a: true,
+      b: false
+    }], {
+      mapHeaders: h => `${h}|||`
+    }, (err, csv) => {
+      expect(csv).to.have.string('a|||');
+    });
+  });
   it('headerPathString', () => {
     jsonexport({
       a: {

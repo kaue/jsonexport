@@ -1,5 +1,7 @@
 ## Change log
 ----------------------
+- v2.3.0 - added mapHeaders option
+  - ran npm audit fix
 - v2.2.0 - Better browser distribution
   - Browser based files in dist are overwritten for best browser building
   - Found unused code and removed
