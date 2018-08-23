@@ -286,6 +286,8 @@ var Parser = function () {
         });
       }
 
+      if (this._options.mapHeaders) headers = headers.map(this._options.mapHeaders);
+
       return headers.join(this._options.rowDelimiter);
     }
   }]);

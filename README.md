@@ -246,6 +246,7 @@ In order to get the most of out of this module, you can customize many parameter
 - `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
 - `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
 - `rename` - `Array` Used to set a custom header text, defaults to `[]` example `['Last Name', 'Name']`
+- `mapHeaders` - `Function` Post-process headers after they are calculated with delimiters, example `mapHeaders: (header) => header.replace(/foo\./, '')`
 - `rowDelimiter` - `String` Change the file row delimiter
     - Defaults to `,` (**cvs format**).
     - Use `\t` for **xls format**.
@@ -339,4 +340,5 @@ var options={
 - [Pierre Guillaume](https://github.com/papswell)
 - [Acker Apple](https://github.com/AckerApple) [![hire me](https://ackerapple.github.io/resume/assets/images/hire-me-badge.svg)](https://ackerapple.github.io/resume/)
 - [Victor Hahn](https://github.com/rv-vhahn)
+- [Jason Macgowan](https://github.com/jasonmacgowan)
 - [And many more...](https://github.com/kauegimenes/jsonexport/graphs/contributors)
