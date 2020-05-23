@@ -9,7 +9,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/kauegimenes/jsonexport.svg)](https://github.com/kauegimenes/jsonexport/stargazers)
 [![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
 
-✔ **easy to use** 👌 (should as expected without much customization)️
+✔ **easy to use** 👌 (should work as expected without much customization)️
 
 ✔ **extendable** 🕺 (many options to customize the output)
 
