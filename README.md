@@ -9,11 +9,15 @@
 [![GitHub stars](https://img.shields.io/github/stars/kauegimenes/jsonexport.svg)](https://github.com/kauegimenes/jsonexport/stargazers)
 [![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
 
-✔ easy to use (should as expected without much customization)️
-✔ extendable (many options to customize the output)
-✔️small (0 dependencies)
-✔ scalable (works with big files using Streams)
-✔ fast 
+✔ **easy to use** 👌 (should as expected without much customization)️
+
+✔ **extendable** 🕺 (many options to customize the output)
+
+✔️ **tiny** 🐜 (0 dependencies)
+
+✔ **scalable** 💪 (works with big files using Streams)
+
+✔ **fast** ⚡ 
 
 [Project Page](http://kauegimenes.github.io/jsonexport/)
 
