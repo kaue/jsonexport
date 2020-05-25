@@ -70,4 +70,32 @@ describe('Array', () => {
       expect(csv).to.equal(`a.b,a.c.d,a.e.f${os.EOL}true,1,1${os.EOL},2,2${os.EOL},3,${os.EOL},4,`);
     });
   });
+  it('with nested arrays & empty strings', () => {
+    jsonexport([
+      {
+        "a": "",
+        "b": "b",
+        "c": [
+          {
+            "a": "a1",
+            "b": "b1"
+          },
+          {
+            "a": "a2",
+            "b": "b2"
+          },
+          {
+            "a": "",
+            "b": "b3"
+          },
+          {
+            "a": "a4",
+            "b": "b4"
+          }
+        ]
+      }
+    ], {}, (err, csv) => {
+      expect(csv).to.equal(`a,b,c.a,c.b${os.EOL},b,a1,b1${os.EOL},,a2,b2${os.EOL},,,b3${os.EOL},,a4,b4`);
+    });
+  });
 });

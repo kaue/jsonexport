@@ -100,8 +100,18 @@ var Parser = function () {
 
       //Generate the csv output
       fillRows = function fillRows(result) {
-        //Initialize the array with empty strings to handle 'unpopular' headers
-        var resultRows = [Array(self._headers.length).join(".").split(".")];
+        var rows = [];
+        var fillAndPush = function fillAndPush(row) {
+          return rows.push(row.map(function (col) {
+            return col || '';
+          }));
+        };
+        // initialize the array with empty strings to handle 'unpopular' headers
+        var newRow = function newRow() {
+          return new Array(self._headers.length).fill(null);
+        };
+        var emptyRowIndexByHeader = {};
+        var currentRow = newRow();
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
         var _iteratorError2 = undefined;
@@ -111,42 +121,21 @@ var Parser = function () {
             var element = _step2.value;
 
             var elementHeaderIndex = getHeaderIndex(element.item);
-            var placed = false;
-            var _iteratorNormalCompletion3 = true;
-            var _didIteratorError3 = false;
-            var _iteratorError3 = undefined;
-
-            try {
-              for (var _iterator3 = resultRows[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                var row = _step3.value;
-
-                if (!placed && row[elementHeaderIndex] === '' || row[elementHeaderIndex] === undefined) {
-                  row[elementHeaderIndex] = self._escape(element.value);
-                  placed = true;
-                  break;
-                }
-              }
-            } catch (err) {
-              _didIteratorError3 = true;
-              _iteratorError3 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                  _iterator3.return();
-                }
-              } finally {
-                if (_didIteratorError3) {
-                  throw _iteratorError3;
-                }
-              }
+            if (currentRow[elementHeaderIndex] != undefined) {
+              fillAndPush(currentRow);
+              currentRow = newRow();
             }
-
-            if (!placed) {
-              var newRow = Array(self._headers.length).join(".").split(".");
-              newRow[elementHeaderIndex] = self._escape(element.value);
-              resultRows.push(newRow);
+            emptyRowIndexByHeader[elementHeaderIndex] = emptyRowIndexByHeader[elementHeaderIndex] || 0;
+            // make sure there isnt a empty row for this header
+            if (emptyRowIndexByHeader[elementHeaderIndex] < rows.length) {
+              rows[emptyRowIndexByHeader[elementHeaderIndex]][elementHeaderIndex] = self._escape(element.value);
+              emptyRowIndexByHeader[elementHeaderIndex] += 1;
+              continue;
             }
+            currentRow[elementHeaderIndex] = self._escape(element.value);
+            emptyRowIndexByHeader[elementHeaderIndex] += 1;
           }
+          // push last row
         } catch (err) {
           _didIteratorError2 = true;
           _iteratorError2 = err;
@@ -162,15 +151,18 @@ var Parser = function () {
           }
         }
 
-        fileRows = fileRows.concat(self._checkRows(resultRows));
+        if (currentRow.length > 0) {
+          fillAndPush(currentRow);
+        }
+        fileRows = fileRows.concat(self._checkRows(rows));
       };
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator4 = json[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var item = _step4.value;
+        for (var _iterator3 = json[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var item = _step3.value;
 
           //Call checkType to list all items inside this object
           //Items are returned as a object {item: 'Prop Value, Item Name', value: 'Prop Data Value'}
@@ -178,16 +170,16 @@ var Parser = function () {
           fillRows(itemResult);
         }
       } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion4 && _iterator4.return) {
-            _iterator4.return();
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
           }
         } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
