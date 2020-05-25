@@ -1,5 +1,6 @@
 ## Change log
 ----------------------
+- v2.5.0 - Fixed nester array issue
 - v2.3.0 - added mapHeaders option
   - ran npm audit fix
 - v2.2.0 - Better browser distribution
