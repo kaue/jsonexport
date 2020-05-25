@@ -4,6 +4,32 @@ const errElm = document.getElementById('error-elm')
 const jSrcElm = document.getElementById('json-textarea')
 const outElm = document.getElementById('output-textarea')
 
+const defaultData = [{
+  "name": "Bob",
+  "lastname": "Smith",
+  "family": {
+    "name": "Peter",
+    "type": "Father"
+  }
+},{
+  "name": "James",
+  "lastname": "David",
+  "family":{
+    "name": "Julie",
+    "type": "Mother"
+  }
+},{
+  "name": "Robert",
+  "lastname": "Miller",
+  "family": null,
+  "location": [1231,3214,4214]
+},{
+"name": "David",
+"lastname": "Martin",
+"nickname": "dmartin"
+}];
+
+
 function update(){
   try{
     var ob = JSON.parse(jSrcElm.value.replace(/((^\s)|(\s$))/g,''));
@@ -11,10 +37,12 @@ function update(){
     return handleError(e)
   }
 
-  jsonexport(ob, handleExport)
+  jsonexport(ob, function(err,data) {
+    handleExport(err, data, ob);
+  });
 }
 
-function handleExport(err, data){
+function handleExport(err, data, original){
   if(err){
     return handleError(err)
   }else{
@@ -30,11 +58,10 @@ function handleExport(err, data){
   outElm.value = data; // update output display
   
   // sharable url
-  window.history.replaceState(null, null, window.location.pathname + "?json=" + jSrcElm.value); 
+  window.history.replaceState(null, null, window.location.pathname + "?json=" + JSON.stringify(original, null, 2)); 
 }
 
 function handleError(err){
-  //console.error(err)
   errElm.innerHTML = err.toString()
   errElm.style.display=''
 }
@@ -63,8 +90,14 @@ function getUrlParams(url) {
 function loadUrlParams() {
   const params = getUrlParams(window.location.href);
 
-  if (params.json) {
-    jSrcElm.value = params.json
+  if (params.json) {    
+    try {
+      jSrcElm.value = JSON.stringify(JSON.parse(params.json), null, 2);
+    } catch (err) {
+      jSrcElm.value = params.json
+    }
+  } else {
+    jSrcElm.value = JSON.stringify(defaultData, null, 2);
   }
 
   update()
