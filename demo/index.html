@@ -10,16 +10,75 @@
 
     <pre style="display:none;color:red;" id="error-elm"></pre>
 
-    <div>
-      <strong>Paste valid JSON here</strong>
-      <textarea name="json-textarea" id="json-textarea" style="width:100%" rows="12" wrap="off" placeholder="LOADING..."></textArea>
-    </div>
+    <form oninput="update()">
+      <div>
+        <strong>Paste valid JSON here</strong>
+        <textarea name="json-textarea" id="json-textarea" style="width:100%" rows="12" wrap="off" placeholder="LOADING..."></textArea>
+      </div>
+
+      <br />
+      
+      <details>
+        <summary><strong>options</strong></summary>
+        <pre id="options-wrap" style="white-space: pre-wrap;padding-left:3em;">Loading or Error Occurred...</pre>
+      </details>
+    </form>
 
     <br />
 
     <div>
       <strong>Result csv produced here</strong>
       <textarea readonly name="output-textarea" id="output-textarea" style="width:100%" rows="12" wrap="off"></textArea>
+        <a type="button" id="downloadResult">download result</a>
+              
+    </div>
+    <div id="options-template" style="display:none;">
+headerPathString - String Used to create the propriety path, defaults to . example contact: {name: 'example} = contact.name
+  <input name="headerPathString" placeholder="headerPathString" />
+
+fillGaps - Boolean Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to false Issue #22
+  <input type="checkbox" name="fillGabs" value="true" />  true
+
+headers - Array Used to set a custom header order, defaults to [] example ['lastname', 'name']
+
+rename - Array Used to set a custom header text, defaults to [] example ['Last Name', 'Name']
+
+mapHeaders - Function Post-process headers after they are calculated with delimiters, example mapHeaders: (header) => header.replace(/foo\./, '')
+
+rowDelimiter - String Change the file row delimiter. Defaults to , (cvs format). Use \t for xls format. Use ; for (windows excel .csv format).
+  <input name="rowDelimiter" placeholder="rowDelimiter" />
+
+textDelimiter - String The character used to escape the text content if needed (default to ")
+  <input name="textDelimiter" placeholder="textDelimiter" />
+
+forceTextDelimiter - Boolean Set this option to true to wrap every data item and header in the textDelimiter. Defaults to false
+  <input type="checkbox" name="forceTextDelimiter" value="true" />  true
+
+endOfLine - String Replace the OS default EOL.
+  <input name="endOfLine" placeholder="endOfLine" />
+
+mainPathItem - String Every header will have the mainPathItem as the base.
+  <input name="mainPathItem" placeholder="mainPathItem" />
+
+arrayPathString - String This is used to output primitive arrays in a single column, defaults to ;
+  <input name="arrayPathString" placeholder="arrayPathString" />
+
+booleanTrueString - String Will be used instead of true.
+  <input name="booleanTrueString" placeholder="booleanTrueString" />
+
+booleanFalseString - String Will be used instead of false.
+  <input name="booleanFalseString" placeholder="booleanFalseString" />
+
+includeHeaders - Boolean Set this option to false to hide the CSV headers.
+  <input type="checkbox" name="includeHeaders" value="false" />  false
+
+undefinedString - String If you want to display a custom value for undefined strings, use this option. Defaults to .
+  <input name="undefinedString" placeholder="undefinedString" />
+
+verticalOutput - Boolean Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
+  <input type="checkbox" name="verticalOutput" value="false" />  false
+
+typeHandlers - {typeName:(value, index, parent)=>any A key map of constructors used to match by instance to create a value using the defined function (see example)
     </div>
     <script src="index.js"></script>
   </body>
