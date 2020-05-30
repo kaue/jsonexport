@@ -40,6 +40,37 @@ describe('Options', () => {
       expect(csv).to.equal(`a.b,a.c.d${os.EOL}true,true${os.EOL}true,false`);
     });
   });
+  it('fillTopRow', () => {
+    jsonexport([{
+      a: {
+        b: true,
+        c: [{
+            d: 1
+          },
+          {
+            d: 2
+          },
+          {
+            d: 3
+          },
+          {
+            d: 4
+          }
+        ],
+        e: [{
+            f: 1
+          },
+          {
+            f: 2
+          }
+        ]
+      }
+    }], {
+      fillTopRow: true,
+    }, (err, csv) => {
+      expect(csv).to.equal(`a.b,a.c.d,a.e.f${os.EOL}true,1,1${os.EOL},2,2${os.EOL},3,${os.EOL},4,`);
+    });
+  });
   it('mapHeaders', () => {
     jsonexport([{
       a: true,
@@ -219,8 +250,14 @@ describe('Options', () => {
         a: date,
         b: true
       }, {
-        handleDate: (value, name) => value + "|||"
+        typeHandlers: {
+          Object: (value, name) => {
+            if (value instanceof Date) return value.toLocaleString();
+            return value;
+          }
+        }
       }, (err, csv) => {
+        console.log(csv);
         expect(csv).to.have.string('a,' + date + '|||');
       });
     });
