@@ -1,4 +1,4 @@
-# jsonexport
+# jsonexport {} → 📄 
 
 [![Travis](https://travis-ci.org/kauegimenes/jsonexport.svg)](https://travis-ci.org/kauegimenes/jsonexport)
 [![Known Vulnerabilities](https://snyk.io/test/npm/jsonexport/badge.svg)](https://snyk.io/test/npm/jsonexport)
@@ -9,7 +9,15 @@
 [![GitHub stars](https://img.shields.io/github/stars/kauegimenes/jsonexport.svg)](https://github.com/kauegimenes/jsonexport/stargazers)
 [![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
 
-This module makes easy to convert JSON to CSV and its very customizable.
+✔ **easy to use** 👌 (should work as expected without much customization)️
+
+✔ **extendable** 🕺 (many options to customize the output)
+
+✔️ **tiny** 🐜 (0 dependencies)
+
+✔ **scalable** 💪 (works with big files using Streams)
+
+✔ **fast** ⚡ 
 
 [Project Page](http://kauegimenes.github.io/jsonexport/)
 
@@ -40,10 +48,10 @@ Installation command is `npm install jsonexport`.
 Run tests with `npm test`.
 
 ```javascript
-var jsonexport = require('jsonexport');
+const jsonexport = require('jsonexport');
 
-jsonexport({lang: 'Node.js',module: 'jsonexport'}, {rowDelimiter: '|'}, function(err, csv){
-    if(err) return console.log(err);
+jsonexport({lang: 'Node.js', module: 'jsonexport'}, {rowDelimiter: '|'}, function(err, csv){
+    if (err) return console.error(err);
     console.log(csv);
 });
 ```
@@ -63,7 +71,7 @@ Use the code in the folder named **dist** to run jsonexport in the browser
 
 Webpack
 ```javascript
-var jsonexport = require("jsonexport/dist")
+const jsonexport = require("jsonexport/dist")
 ```
 
 Typescript
@@ -74,11 +82,11 @@ import * as jsonexport from "jsonexport/dist"
 ## Stream
 
 ```javascript
-var jsonexport = require('jsonexport');
-var fs = require('fs');
+const jsonexport = require('jsonexport');
+const fs = require('fs');
 
-var reader = fs.createReadStream('data.json');
-var writer = fs.createWriteStream('out.csv');
+const reader = fs.createReadStream('data.json');
+const writer = fs.createWriteStream('out.csv');
 
 reader.pipe(jsonexport()).pipe(writer);
 ```
@@ -90,9 +98,9 @@ reader.pipe(jsonexport()).pipe(writer);
 #### Code
 
 ```javascript
-var jsonexport = require('jsonexport');
+const jsonexport = require('jsonexport');
 
-var contacts = [{
+const contacts = [{
     name: 'Bob',
     lastname: 'Smith'
 },{
@@ -106,8 +114,8 @@ var contacts = [{
     lastname: 'Martin'
 }];
 
-jsonexport(contacts,function(err, csv){
-    if(err) return console.log(err);
+jsonexport(contacts, function(err, csv){
+    if (err) return console.error(err);
     console.log(csv);
 });
 ```
@@ -127,9 +135,9 @@ David,Martin
 #### Code
 
 ```javascript
-var jsonexport = require('jsonexport');
+const jsonexport = require('jsonexport');
 
-var contacts = [{
+const contacts = [{
    name: 'Bob',
    lastname: 'Smith',
    family: {
@@ -154,8 +162,8 @@ var contacts = [{
    nickname: 'dmartin'
 }];
 
-jsonexport(contacts,function(err, csv){
-    if(err) return console.log(err);
+jsonexport(contacts, function(err, csv){
+    if (err) return console.error(err);
     console.log(csv);
 });
 ```
@@ -177,16 +185,16 @@ David,Martin,,,,,dmartin
 #### Code
 
 ```javascript
-var jsonexport = require('jsonexport');
+const jsonexport = require('jsonexport');
 
-var stats = {
+const stats = {
     cars: 12,
     roads: 5,
     traffic: 'slow'
 };
 
-jsonexport(stats,function(err, csv){
-    if(err) return console.log(err);
+jsonexport(stats, function(err, csv){
+    if(err) return console.error(err);
     console.log(csv);
 });
 ```
@@ -204,9 +212,9 @@ traffic,slow
 #### Code
 
 ```javascript
-var jsonexport = require('jsonexport');
+const jsonexport = require('jsonexport');
 
-var stats = {
+const stats = {
     cars: 12,
     roads: 5,
     traffic: 'slow',
@@ -218,8 +226,8 @@ var stats = {
     size: [10,20]
 };
 
-jsonexport(stats,function(err, csv){
-    if(err) return console.log(err);
+jsonexport(stats, function(err, csv){
+    if(err) return console.error(err);
     console.log(csv);
 });
 ```
@@ -272,19 +280,19 @@ In order to get the most of out of this module, you can customize many parameter
 Define types by constructors and what function to run when that type is matched
 
 ```javascript
-var jsonexport = require('jsonexport');
+const jsonexport = require('jsonexport');
 
 //data
-var contacts = {
+const contacts = {
   'a' : Buffer.from('a2b', 'utf8'),
   'b' : Buffer.from('other field', 'utf8'),
   'x' : 22,
   'z' : function(){return 'bad ace'}
 };
 
-var options={
+const options = {
   //definitions to type cast
-  typeHandlers:{
+  typeHandlers: {
     Array:function(value,index,parent){
       return 'replaced-array';
     },
@@ -292,7 +300,7 @@ var options={
       return 'replaced-boolean';
     },
     Function:function(value,index,parent){
-      return value()
+      return value();
     },
     Number:function(value,index,parent){
       return 'replaced-number';
@@ -301,13 +309,14 @@ var options={
       return 'replaced-string';
     },
     Buffer:function(value,index,parent){
-      return value.toString()
+      return value.toString();
     }
   }
-}
+};
 
-jsonexport(contacts, options, function(err, csv){
-  console.log( csv )
+jsonexport(contacts, options, function(err, csv) {
+  if (err) return console.error(err);
+  console.log(csv);
 });
 ```
 
@@ -322,14 +331,14 @@ z,bad ace
 
 When using **typeHandlers**, Do NOT do this
 
-```
-var options={
-  typeHandlers:{
-    Object:function(value,index,parent){
+```javascript
+const options = {
+  typeHandlers: {
+    Object:function(value, index, parent){
       return 'EVERYTHING IS AN OBJECT';
     }
   }
-}
+};
 ```
 > It is NOT an error, however the recursive result becomes illegable functionality strings
 
