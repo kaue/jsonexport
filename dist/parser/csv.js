@@ -9,7 +9,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var EOL = require('../core/eol');
 var joinRows = require('../core/join-rows');
 var Handler = require('./handler');
 var helper = require('../core/helper');
@@ -18,7 +17,7 @@ var Parser = function () {
   function Parser(options) {
     _classCallCheck(this, Parser);
 
-    this._options = this._parseOptions(options) || {};
+    this._options = options || {};
     this._handler = new Handler(this._options);
     this._headers = this._options.headers || [];
     this._escape = require('../core/escape-delimiters')(this._options.textDelimiter, this._options.rowDelimiter, this._options.forceTextDelimiter);
@@ -127,7 +126,7 @@ var Parser = function () {
             }
             emptyRowIndexByHeader[elementHeaderIndex] = emptyRowIndexByHeader[elementHeaderIndex] || 0;
             // make sure there isnt a empty row for this header
-            if (emptyRowIndexByHeader[elementHeaderIndex] < rows.length) {
+            if (self._options.fillTopRow && emptyRowIndexByHeader[elementHeaderIndex] < rows.length) {
               rows[emptyRowIndexByHeader[elementHeaderIndex]][elementHeaderIndex] = self._escape(element.value);
               emptyRowIndexByHeader[elementHeaderIndex] += 1;
               continue;
@@ -226,40 +225,6 @@ var Parser = function () {
         fileRows.push(horizontalRows[1].join(this._options.rowDelimiter));
       }
       return joinRows(fileRows, this._options.endOfLine);
-    }
-
-    /**
-     * Replaces the default options with the custom user options
-     *
-     * @param {Options} userOptions
-     */
-
-  }, {
-    key: '_parseOptions',
-    value: function _parseOptions(userOptions) {
-      var defaultOptions = {
-        headers: [], //              Array
-        rename: [], //               Array
-        headerPathString: '.', //    String
-        rowDelimiter: ',', //        String
-        textDelimiter: '"', //       String
-        arrayPathString: ';', //     String
-        undefinedString: '', //      String
-        endOfLine: EOL || '\n', //   String
-        mainPathItem: null, //       String
-        booleanTrueString: null, //  String
-        booleanFalseString: null, // String
-        includeHeaders: true, //     Boolean
-        fillGaps: false, //          Boolean
-        verticalOutput: true, //     Boolean
-        forceTextDelimiter: false, //Boolean
-        //Handlers
-        handleString: undefined, //  Function
-        handleNumber: undefined, //  Function
-        handleBoolean: undefined, // Function
-        handleDate: undefined //    Function
-      };
-      return Object.assign({}, defaultOptions, userOptions);
     }
   }, {
     key: 'headers',
