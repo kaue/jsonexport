@@ -31,6 +31,7 @@
 - [Browser](#browser)
   - [Browser Import Examples](#browser-import-examples)
 - [Stream](#stream)
+- [Promise](#promise)
 - [JSON Array Example](#json-array-example)
   - [Simple Array](#simple-array)
   - [JSON Object Example](#json-object-example)
@@ -89,6 +90,17 @@ const reader = fs.createReadStream('data.json');
 const writer = fs.createWriteStream('out.csv');
 
 reader.pipe(jsonexport()).pipe(writer);
+```
+
+## Promise
+
+```javascript
+const jsonexport = require('jsonexport')
+try {
+    const csv = await jsonexport({lang: 'Node.js', module: 'jsonexport'}, {rowDelimiter: '|'});
+} catch (err) {
+    console.error(err);
+}
 ```
 
 ## JSON Array Example
