@@ -213,38 +213,44 @@ describe('Options', () => {
       expect(csv).to.have.string('a,b');
     });
   });
-  describe.skip('Handlers', () => {
-    it('handleString', () => {
+  describe('Type Handlers', () => {
+    it('String', () => {
       jsonexport({
         a: 'test',
         b: true
       }, {
-        handleString: (value, name) => value + "|||"
+        typeHandlers: {
+          String: (value) => value + "|||"
+        }
       }, (err, csv) => {
         expect(csv).to.have.string('a,test|||');
       });
     });
-    it('handleNumber', () => {
+    it('Number', () => {
       jsonexport({
         a: 1,
         b: true
       }, {
-        handleNumber: (value, name) => value + "|||"
+        typeHandlers: {
+          Number: (value) => value + "|||"
+        }
       }, (err, csv) => {
         expect(csv).to.have.string('a,1|||');
       });
     });
-    it('handleBoolean', () => {
+    it('Boolean', () => {
       jsonexport({
         a: true,
         b: true
       }, {
-        handleBoolean: (value, name) => value + "|||"
+        typeHandlers: {
+          Boolean: (value, name) => value + "|||"
+        }
       }, (err, csv) => {
         expect(csv).to.have.string('a,true|||');
       });
     });
-    it('handleDate', () => {
+    it('Date', (done) => {
       var date = new Date();
       jsonexport({
         a: date,
@@ -252,13 +258,13 @@ describe('Options', () => {
       }, {
         typeHandlers: {
           Object: (value, name) => {
-            if (value instanceof Date) return value.toLocaleString();
+            if (value instanceof Date) return date + '|||';
             return value;
           }
         }
       }, (err, csv) => {
-        console.log(csv);
         expect(csv).to.have.string('a,' + date + '|||');
+        done();
       });
     });
   });

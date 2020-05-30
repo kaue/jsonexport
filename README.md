@@ -282,13 +282,6 @@ In order to get the most of out of this module, you can customize many parameter
 - `verticalOutput` - `Boolean` Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
 - `typeHandlers` - `{typeName:(value, index, parent)=>any` A key map of constructors used to match by instance to create a value using the defined function ([see example](#typehandlers))
 
-**Deprecated Options** (Use typeHandlers)
-- `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
-- `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
-- `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
-- `handleDate` - `Function` Use this to customize all `Dates` in the CSV file. (default to date.toLocaleString)
-
-
 #### typeHandlers
 Define types by constructors and what function to run when that type is matched
 
@@ -341,6 +334,25 @@ x,replaced-number
 z,bad ace
 ```
 
+Date typeHandler?
+
+```javascript
+var date = new Date();
+jsonexport({
+    a: date,
+    b: true
+}, {
+    typeHandlers: {
+        Object: (value, name) => {
+            if (value instanceof Date) return date.toLocaleString();
+            return value;
+        }
+    }
+}, (err, csv) => {
+    if (err) return console.error(err);
+    console.log(csv);
+});
+```
 
 When using **typeHandlers**, Do NOT do this
 
