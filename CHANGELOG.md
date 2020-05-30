@@ -1,5 +1,7 @@
 ## Change log
 ----------------------
+- v2.5.2 - fix stream memory limit (issue #64)
+- v2.5.1 - security fixes (npm audit)
 - v2.5.0 - Fixed nester array issue
 - v2.3.0 - added mapHeaders option
   - ran npm audit fix
