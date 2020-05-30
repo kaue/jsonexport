@@ -15,14 +15,8 @@ var Handler = function () {
 
     this._options = options;
 
-    //an object of {typeName:(value,index,parent)=>any}
+    // an object of {typeName:(value,index,parent)=>any}
     this._options.typeHandlers = this._options.typeHandlers || {};
-
-    //deprecated options
-    this._options.handleString = this._options.handleString ? warnDepOp('handleString', this._options.handleString) : this._handleString;
-    this._options.handleNumber = this._options.handleNumber ? warnDepOp('handleNumber', this._options.handleNumber) : this._handleNumber;
-    this._options.handleBoolean = this._options.handleBoolean ? warnDepOp('handleBoolean', this._options.handleBoolean) : this._handleBoolean;
-    this._options.handleDate = this._options.handleDate ? warnDepOp('handleDate', this._options.handleDate) : this._handleDate;
   }
 
   /**
@@ -95,25 +89,24 @@ var Handler = function () {
     key: 'check',
     value: function check(element, item, index, parent) {
       element = this.castValue(element, item, index, parent);
-
-      //try simple value by highier performance switch
+      // try simple value by highier performance switch
       switch (typeof element === 'undefined' ? 'undefined' : _typeof(element)) {
         case 'string':
           return [{
             item: item,
-            value: this._options.handleString(element, item)
+            value: this._handleString(element, item)
           }];
 
         case 'number':
           return [{
             item: item,
-            value: this._options.handleNumber(element, item)
+            value: this._handleNumber(element, item)
           }];
 
         case 'boolean':
           return [{
             item: item,
-            value: this._options.handleBoolean.bind(this)(element, item)
+            value: this._handleBoolean.bind(this)(element, item)
           }];
       }
 
@@ -234,11 +227,6 @@ var Handler = function () {
 }();
 
 module.exports = Handler;
-
-function warnDepOp(optionName, backOut) {
-  console.warn("[jsonexport]: option " + optionName + " has been deprecated. Use option.typeHandlers");
-  return backOut;
-}
 
 var globalScope = typeof window === "undefined" ? global : window;
 function isInstanceOfTypeName(element, typeName) {

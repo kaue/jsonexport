@@ -32,6 +32,7 @@
 - [Browser](#browser)
   - [Browser Import Examples](#browser-import-examples)
 - [Stream](#stream)
+- [Promise](#promise)
 - [JSON Array Example](#json-array-example)
   - [Simple Array](#simple-array)
   - [JSON Object Example](#json-object-example)
@@ -90,6 +91,17 @@ const reader = fs.createReadStream('data.json');
 const writer = fs.createWriteStream('out.csv');
 
 reader.pipe(jsonexport()).pipe(writer);
+```
+
+## Promise
+
+```javascript
+const jsonexport = require('jsonexport')
+try {
+    const csv = await jsonexport({lang: 'Node.js', module: 'jsonexport'}, {rowDelimiter: '|'});
+} catch (err) {
+    console.error(err);
+}
 ```
 
 ## JSON Array Example
@@ -251,6 +263,7 @@ In order to get the most of out of this module, you can customize many parameter
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
 - `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
+- `fillTopRow` - `Boolean` try filling top rows first for unpopular colums, defaults to `false`
 - `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
 - `rename` - `Array` Used to set a custom header text, defaults to `[]` example `['Last Name', 'Name']`
 - `mapHeaders` - `Function` Post-process headers after they are calculated with delimiters, example `mapHeaders: (header) => header.replace(/foo\./, '')`
@@ -269,13 +282,6 @@ In order to get the most of out of this module, you can customize many parameter
 - `undefinedString` - `String` If you want to display a custom value for undefined strings, use this option. Defaults to ` `.
 - `verticalOutput` - `Boolean` Set this option to false to create a horizontal output for JSON Objects, headers in the first row, values in the second.
 - `typeHandlers` - `{typeName:(value, index, parent)=>any` A key map of constructors used to match by instance to create a value using the defined function ([see example](#typehandlers))
-
-**Deprecated Options** (Use typeHandlers)
-- `handleString` - `Function` Use this to customize all `Strings` in the CSV file.
-- `handleNumber` - `Function` Use this to customize all `Numbers` in the CSV file.
-- `handleBoolean` - `Function` Use this to customize all `Booleans` in the CSV file.
-- `handleDate` - `Function` Use this to customize all `Dates` in the CSV file. (default to date.toLocaleString)
-
 
 #### typeHandlers
 Define types by constructors and what function to run when that type is matched
@@ -329,6 +335,25 @@ x,replaced-number
 z,bad ace
 ```
 
+Date typeHandler?
+
+```javascript
+var date = new Date();
+jsonexport({
+    a: date,
+    b: true
+}, {
+    typeHandlers: {
+        Object: (value, name) => {
+            if (value instanceof Date) return date.toLocaleString();
+            return value;
+        }
+    }
+}, (err, csv) => {
+    if (err) return console.error(err);
+    console.log(csv);
+});
+```
 
 When using **typeHandlers**, Do NOT do this
 

@@ -40,6 +40,37 @@ describe('Options', () => {
       expect(csv).to.equal(`a.b,a.c.d${os.EOL}true,true${os.EOL}true,false`);
     });
   });
+  it('fillTopRow', () => {
+    jsonexport([{
+      a: {
+        b: true,
+        c: [{
+            d: 1
+          },
+          {
+            d: 2
+          },
+          {
+            d: 3
+          },
+          {
+            d: 4
+          }
+        ],
+        e: [{
+            f: 1
+          },
+          {
+            f: 2
+          }
+        ]
+      }
+    }], {
+      fillTopRow: true,
+    }, (err, csv) => {
+      expect(csv).to.equal(`a.b,a.c.d,a.e.f${os.EOL}true,1,1${os.EOL},2,2${os.EOL},3,${os.EOL},4,`);
+    });
+  });
   it('mapHeaders', () => {
     jsonexport([{
       a: true,
@@ -182,46 +213,58 @@ describe('Options', () => {
       expect(csv).to.have.string('a,b');
     });
   });
-  describe.skip('Handlers', () => {
-    it('handleString', () => {
+  describe('Type Handlers', () => {
+    it('String', () => {
       jsonexport({
         a: 'test',
         b: true
       }, {
-        handleString: (value, name) => value + "|||"
+        typeHandlers: {
+          String: (value) => value + "|||"
+        }
       }, (err, csv) => {
         expect(csv).to.have.string('a,test|||');
       });
     });
-    it('handleNumber', () => {
+    it('Number', () => {
       jsonexport({
         a: 1,
         b: true
       }, {
-        handleNumber: (value, name) => value + "|||"
+        typeHandlers: {
+          Number: (value) => value + "|||"
+        }
       }, (err, csv) => {
         expect(csv).to.have.string('a,1|||');
       });
     });
-    it('handleBoolean', () => {
+    it('Boolean', () => {
       jsonexport({
         a: true,
         b: true
       }, {
-        handleBoolean: (value, name) => value + "|||"
+        typeHandlers: {
+          Boolean: (value, name) => value + "|||"
+        }
       }, (err, csv) => {
         expect(csv).to.have.string('a,true|||');
       });
     });
-    it('handleDate', () => {
+    it('Date', (done) => {
       var date = new Date();
       jsonexport({
         a: date,
         b: true
       }, {
-        handleDate: (value, name) => value + "|||"
+        typeHandlers: {
+          Object: (value, name) => {
+            if (value instanceof Date) return date + '|||';
+            return value;
+          }
+        }
       }, (err, csv) => {
         expect(csv).to.have.string('a,' + date + '|||');
+        done();
       });
     });
   });
