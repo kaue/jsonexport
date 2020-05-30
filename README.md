@@ -8,12 +8,13 @@
 [![NPM License](https://img.shields.io/npm/l/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![GitHub stars](https://img.shields.io/github/stars/kauegimenes/jsonexport.svg)](https://github.com/kauegimenes/jsonexport/stargazers)
 [![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/jsonexport)
 
 ✔ **easy to use** 👌 (should work as expected without much customization)️
 
 ✔ **extendable** 🕺 (many options to customize the output)
 
-✔️ **tiny** 🐜 (0 dependencies)
+✔️ **tiny** 🐜 (0 dependencies) 
 
 ✔ **scalable** 💪 (works with big files using Streams)
 
