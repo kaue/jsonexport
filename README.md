@@ -20,9 +20,9 @@
 
 ✔ **fast** ⚡ 
 
-[Project Page](http://kauegimenes.github.io/jsonexport/)
+[Project Page](https://kauegimenes.github.io/jsonexport/)
 
-[Online Demo Page](http://kauegimenes.github.io/jsonexport/demo/)
+[Online Demo Page](https://kauegimenes.github.io/jsonexport/demo/)
 
 <details>
   <summary><b>Table of Contents</b></summary>
