@@ -102,7 +102,7 @@ var Parser = function () {
         var rows = [];
         var fillAndPush = function fillAndPush(row) {
           return rows.push(row.map(function (col) {
-            return col || '';
+            return col != null ? col : '';
           }));
         };
         // initialize the array with empty strings to handle 'unpopular' headers
