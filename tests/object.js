@@ -3,7 +3,7 @@
 /* jshint -W030 */
 
 var chai = require('chai');
-var expect = chai.expect;
+var {assert, expect} = require('chai');
 var jsonexport = require('../lib/index');
 var os = require('os');
 
@@ -14,17 +14,16 @@ if( isRemoteTest ){
 }
 
 describe('Object', () => {
-  it('simple', () => {
-    jsonexport({
+  it('simple', async () => {
+    const csv = await jsonexport({
       lang: 'Node.js',
       module: 'jsonexport'
-    }, {}, (err, csv) => {
-      expect(csv).to.equal(`lang,Node.js${os.EOL}module,jsonexport`);
-    });
+    }, {})
+    assert.equal(csv, `lang,Node.js${os.EOL}module,jsonexport`);
   });
 
-  it('complex', () => {
-    jsonexport({
+  it('complex', async () => {
+    const csv = await jsonexport({
       cars: 12,
       roads: 5,
       traffic: 'slow',
@@ -35,12 +34,11 @@ describe('Object', () => {
       },
       size: [10, 20],
       escaped: 'I am a "quoted" field'
-    }, {}, (err, csv) => {
-      expect(csv).to.equal(`cars,12${os.EOL}roads,5${os.EOL}traffic,slow${os.EOL}speed.max,123${os.EOL}speed.avg,20${os.EOL}speed.min,5${os.EOL}size,10;20${os.EOL}escaped,"I am a ""quoted"" field"`);
-    });
+    }, {})
+    assert.equal(csv, `cars,12${os.EOL}roads,5${os.EOL}traffic,slow${os.EOL}speed.max,123${os.EOL}speed.avg,20${os.EOL}speed.min,5${os.EOL}size,10;20${os.EOL}escaped,"I am a ""quoted"" field"`);
   });
 
-  it('Github #41 p1',()=>{
+  it('Github #41 p1',async ()=>{
     var contacts = [{
         name: 'Bob',
         lastname: 'Smith',
@@ -53,24 +51,22 @@ describe('Object', () => {
         test: true
     }];
 
-    jsonexport(contacts, (err, csv)=>{
-      expect(csv).to.equal(`name,lastname,status,test${os.EOL}Bob,Smith,,true${os.EOL}James,David,fired,true`);
-    });
+    const csv = await jsonexport(contacts)
+    assert.equal(csv, `name,lastname,status,test${os.EOL}Bob,Smith,,true${os.EOL}James,David,fired,true`);
   });
 
-  it('Github #41 p2',()=>{
+  it('Github #41 p2',async ()=>{
     var contacts = {
       'a' : 'another field',
       'b' : '',
       'c' : 'other field'
     };
 
-    jsonexport(contacts, (err, csv)=>{
-      expect(csv).to.equal(`a,another field${os.EOL}b,${os.EOL}c,other field`);
-    });
+    const csv = await jsonexport(contacts)
+    assert.equal(csv, `a,another field${os.EOL}b,${os.EOL}c,other field`);
   });
 
-  it('Buffer to String - Github #48',()=>{
+  it('Buffer to String - Github #48',async ()=>{
     var contacts = {
       '0' : true,
       '1' : [11,22,33],
@@ -110,8 +106,21 @@ describe('Object', () => {
       }
     };
 
-    jsonexport(contacts, options, (err, csv)=>{
-      expect(csv).to.equal(`0,replaced-boolean${os.EOL}1,replaced-array${os.EOL}2,bad ace${os.EOL}a,parentless-a${os.EOL}b,replaced-string${os.EOL}c,replaced-number${os.EOL}d.x,other field`);
-    });
+    const csv = await jsonexport(contacts, options)
+    assert.equal(csv, `0,replaced-boolean${os.EOL}1,replaced-array${os.EOL}2,bad ace${os.EOL}a,parentless-a${os.EOL}b,replaced-string${os.EOL}c,replaced-number${os.EOL}d.x,other field`);
+  });
+
+  it('Zero, undefined, & null', async () => {
+    const csv = await jsonexport([
+      {
+        "a": 0,
+        "b": undefined,
+        "c": null,
+        "d": 1,
+        "e": "this"
+      }
+    ], {})
+
+    assert.equal(csv, `a,b,c,d,e\n0,,,1,this`)
   });
 });

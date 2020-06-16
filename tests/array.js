@@ -68,7 +68,7 @@ describe('Array', () => {
 
     assert.equal(csv, `a.b,a.c.d,a.e.f${os.EOL}true,1,${os.EOL},2,${os.EOL},3,${os.EOL},4,1${os.EOL},,2`)
   });
-  it('with nested arrays, empty strings, zero, undefined, & null', async () => {
+  it('with nested arrays & empty strings', async () => {
     const csv = await jsonexport([
       {
         "a": "",
@@ -89,19 +89,11 @@ describe('Array', () => {
           {
             "a": "a4",
             "b": "b4"
-          },
-          {
-            "a": 0,
-            "b": undefined
-          },
-          {
-            "a": 1,
-            "b": null
-          },
+          }
         ]
       }
     ], {})
 
-    assert.equal(csv, `a,b,c.a,c.b${os.EOL},b,a1,b1${os.EOL},,a2,b2${os.EOL},,,b3${os.EOL},,a4,b4${os.EOL},,0,${os.EOL},,1,`)
+    assert.equal(csv, `a,b,c.a,c.b${os.EOL},b,a1,b1${os.EOL},,a2,b2${os.EOL},,,b3${os.EOL},,a4,b4`)
   });
 });
