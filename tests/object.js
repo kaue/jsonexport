@@ -123,4 +123,38 @@ describe('Object', () => {
 
     assert.equal(csv, `a,b,c,d,e\n0,,,1,this`)
   });
+
+  it('Date', async () => {
+    const csv = await jsonexport([
+      {
+        "a": 0,
+        "b": undefined,
+        "c": null,
+        "d": 1,
+        "e": "this",
+        "f": new Date('10/20/2020'),
+      }
+    ], {})
+
+    assert.equal(csv, `a,b,c,d,e,f\n0,,,1,this,${(new Date('10/20/2020')).toLocaleDateString()}`)
+  });
+
+  it('Date with handlers', async () => {
+    const csv = await jsonexport([
+      {
+        "a": 0,
+        "b": undefined,
+        "c": null,
+        "d": 1,
+        "e": "this",
+        "f": new Date('10/20/2020'),
+      }
+    ], {
+      typeHandlers: {
+        Date: (value, index, parent) => value.toISOString(),
+      }
+    })
+
+    assert.equal(csv, `a,b,c,d,e,f\n0,,,1,this,2020-10-19T22:00:00.000Z`)
+  });
 });
