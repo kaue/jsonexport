@@ -139,7 +139,7 @@ describe('Object', () => {
     assert.equal(csv, `a,b,c,d,e,f\n0,,,1,this,${(new Date('10/20/2020')).toLocaleDateString()}`)
   });
 
-  it('Date with handlers', async () => {
+  it('Date with typeHandlers.Date', async () => {
     const csv = await jsonexport([
       {
         "a": 0,
@@ -151,10 +151,28 @@ describe('Object', () => {
       }
     ], {
       typeHandlers: {
-        Date: (value, index, parent) => value.toISOString(),
+        //Using "replace-date" because of problem of locale
+        Date: (value, index, parent) => "replaced-date",
       }
     })
 
-    assert.equal(csv, `a,b,c,d,e,f\n0,,,1,this,2020-10-19T22:00:00.000Z`)
+    assert.equal(csv, `a,b,c,d,e,f\n0,,,1,this,replaced-date`)
+  });
+
+  it('Date with handleDate', async () => {
+    const csv = await jsonexport([
+      {
+        "a": 0,
+        "b": undefined,
+        "c": null,
+        "d": 1,
+        "e": "this",
+        "f": new Date('10/20/2020'),
+      }
+    ], {
+      handleDate: (element, item) => "replaced-date",
+    })
+
+    assert.equal(csv, `a,b,c,d,e,f\n0,,,1,this,replaced-date`)
   });
 });
