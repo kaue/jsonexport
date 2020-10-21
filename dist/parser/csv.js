@@ -125,7 +125,7 @@ var Parser = function () {
               currentRow = newRow();
             }
             emptyRowIndexByHeader[elementHeaderIndex] = emptyRowIndexByHeader[elementHeaderIndex] || 0;
-            // make sure there isnt a empty row for this header
+            // make sure there isn't a empty row for this header
             if (self._options.fillTopRow && emptyRowIndexByHeader[elementHeaderIndex] < rows.length) {
               rows[emptyRowIndexByHeader[elementHeaderIndex]][elementHeaderIndex] = self._escape(element.value);
               emptyRowIndexByHeader[elementHeaderIndex] += 1;
@@ -201,7 +201,7 @@ var Parser = function () {
       var horizontalRows = [[], []];
 
       fillRows = function fillRows(result) {
-        var value = result.value ? result.value.toString() : self._options.undefinedString;
+        var value = result.value || result.value === 0 ? result.value.toString() : self._options.undefinedString;
         value = self._escape(value);
 
         //Type header;value
