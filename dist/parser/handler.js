@@ -57,7 +57,7 @@ var Handler = function () {
       if (helper.isDate(element)) {
         return [{
           item: item,
-          value: this._options.handleDate(element, item)
+          value: (this._options.handleDate || this._handleDate)(element, item)
         }];
       }
       //Check if element is an Array
