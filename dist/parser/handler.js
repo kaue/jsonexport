@@ -147,7 +147,20 @@ var Handler = function () {
     value: function _handleArray(array) {
       var self = this;
       var result = [];
+      var headers = [];
       var firstElementWithoutItem;
+
+      var getHeaderIndex = function getHeaderIndex(item) {
+        var index = headers.indexOf(item);
+        if (index === -1) {
+          headers.push(item);
+          index = headers.indexOf(item);
+        }
+        return index;
+      };
+      var sortByHeaders = function sortByHeaders(itemA, itemB) {
+        return getHeaderIndex(itemA.item) - getHeaderIndex(itemB.item);
+      };
       for (var aIndex = 0; aIndex < array.length; ++aIndex) {
         var element = array[aIndex];
         //Check the propData type
@@ -161,8 +174,12 @@ var Handler = function () {
         } else if (resultCheckType.length > 0 && !firstResult.item && firstElementWithoutItem === undefined) {
           firstElementWithoutItem = firstResult;
         }
+        for (var bIndex = 0; bIndex < resultCheckType.length; bIndex++) {
+          getHeaderIndex(resultCheckType[bIndex].item);
+        }
         //Append to results
-        result = result.concat(resultCheckType);
+        var sortedResultCheckType = resultCheckType.sort(sortByHeaders);
+        result = result.concat(sortedResultCheckType);
       }
       return result;
     }

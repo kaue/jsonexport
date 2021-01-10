@@ -96,4 +96,62 @@ describe('Array', () => {
 
     assert.equal(csv, `a,b,c.a,c.b${os.EOL},b,a1,b1${os.EOL},,a2,b2${os.EOL},,,b3${os.EOL},,a4,b4`)
   });
+  it("with nested arrays & missing items in schema", async () => {
+    const csv = await jsonexport([
+      {
+        a: {
+          b: true,
+          c: [
+            {
+              d: 1,
+              h: 1,
+            },
+            {
+              h: 2,
+            },
+            {
+              d: 3,
+              h: 3,
+            },
+          ],
+        },
+      },
+    ]);
+
+    assert.equal(
+      csv,
+      `a.b,a.c.d,a.c.h${os.EOL}true,1,1${os.EOL},,2${os.EOL},3,3`
+    );
+  });
+
+  it("with nested arrays & out of order schema", async () => {
+    const csv = await jsonexport([
+      {
+        a: {
+          b: true,
+          c: [
+            {
+              d: 1,
+              h: 1,
+            },
+            {
+              h: 5,
+              d: 4,
+            },
+            {
+              d: 3,
+              h: 3,
+            },
+          ],
+        },
+      },
+    ]);
+
+    assert.equal(
+      csv,
+      `a.b,a.c.d,a.c.h${os.EOL}true,1,1${os.EOL},4,5${os.EOL},3,3`
+    );
+  });
+
+
 });
