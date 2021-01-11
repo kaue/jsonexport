@@ -96,6 +96,7 @@ describe('Array', () => {
 
     assert.equal(csv, `a,b,c.a,c.b${os.EOL},b,a1,b1${os.EOL},,a2,b2${os.EOL},,,b3${os.EOL},,a4,b4`)
   });
+
   it("with nested arrays & missing items in schema", async () => {
     const csv = await jsonexport([
       {
@@ -153,5 +154,133 @@ describe('Array', () => {
     );
   });
 
+
+
+  it("with nested arrays & complex json schema", async () => {
+    const csv = await jsonexport([
+      {
+        a: {
+          b: [
+            {
+              c: [
+                {
+                  d: {
+                    name: "Name 1",
+                    f: {
+                      g: [
+                        {
+                          h: 1,
+                          i: 2,
+                          j: 3,
+                        },
+                        {
+                          h: 4,
+                          i: 5,
+                          j: 6,
+                        },
+                        {
+                          h: 7,
+                          i: 8,
+                          j: 9,
+                        },
+                        {
+                          h: 10,
+                          i: 11,
+                          j: 12,
+                        },
+                      ],
+                    },
+                  },
+                },
+                {
+                  d: {
+                    name: "Name 2",
+                    f: {
+                      g: [
+                        {
+                          h: 13,
+                          i: 14,
+                          j: 15,
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ]);
+    console.log(csv)
+    assert.equal(
+      csv,
+      `a.b.c.d.name,a.b.c.d.f.g.h,a.b.c.d.f.g.i,a.b.c.d.f.g.j${os.EOL}Name 1,1,2,3${os.EOL},4,5,6${os.EOL},7,8,9${os.EOL},10,11,12${os.EOL}Name 2,13,14,15`
+    );
+  })
+
+  it("with nested arrays & complex json schema & inconsistent items", async () => {
+    const csv = await jsonexport([
+      {
+        a: {
+          b: [
+            {
+              c: [
+                {
+                  d: {
+                    name: "Name 1",
+                    date: "2020-03-31",
+                    f: {
+                      g: [
+                        {
+                          h: 1,
+                          i: 2,
+                          j: 3,
+                        },
+                        {
+                          h: 4,
+                          i: 5,
+                          j: 6,
+                        },
+                        {
+                          h: 7,
+                          i: 8,
+                          j: 9,
+                        },
+                        {
+                          h: 10,
+                          i: 11,
+                          j: 12,
+                        },
+                      ],
+                    },
+                  },
+                },
+                {
+                  d: {
+                    date: "2020-06-30",
+                    name: "Name 2",
+                    f: {
+                      g: [
+                        {
+                          h: 13,
+                          i: 14,
+                          j: 15,
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ]);
+    assert.equal(
+      csv,
+      `a.b.c.d.name,a.b.c.d.date,a.b.c.d.f.g.h,a.b.c.d.f.g.i,a.b.c.d.f.g.j${os.EOL}Name 1,2020-03-31,1,2,3${os.EOL},,4,5,6${os.EOL},,7,8,9${os.EOL},,10,11,12${os.EOL}Name 2,2020-06-30,13,14,15`
+    );
+  });
 
 });
