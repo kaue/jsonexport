@@ -8,7 +8,8 @@
     "test": "mocha tests/*.js tests/**/*.js",
     "lint": "./node_modules/.bin/jshint ./lib/index.js",
     "build": "webpack demo/src demo/index.js --optimize-minimize",
-    "start": "open demo/index.html"
+    "start": "open demo/index.html",
+    "deploy": "npm run build && git add . && git commit -m \"update to latest\" && git push"
   },
   "pre-commit": [
     "build"
