@@ -1,13 +1,14 @@
 {
   "private": true,
   "name": "jsonexport-gh-pages",
-  "version": "2.0.12",
+  "version": "0.0.0",
   "description": "Makes easy to convert JSON to CSV",
   "main": "./lib",
   "scripts": {
     "test": "mocha tests/*.js tests/**/*.js",
     "lint": "./node_modules/.bin/jshint ./lib/index.js",
-    "build": "webpack demo/src demo/index.js --optimize-minimize"
+    "build": "webpack demo/src demo/index.js --optimize-minimize",
+    "start": "open demo/index.html"
   },
   "pre-commit": [
     "build"
