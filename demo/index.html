@@ -17,7 +17,7 @@
       </div>
 
       <br />
-      
+
       <details>
         <summary><strong>options</strong></summary>
         <pre id="options-wrap" style="white-space: pre-wrap;padding-left:3em;">Loading or Error Occurred...</pre>
@@ -30,7 +30,7 @@
       <strong>Result csv produced here</strong>
       <textarea readonly name="output-textarea" id="output-textarea" style="width:100%" rows="12" wrap="off"></textArea>
         <a type="button" id="downloadResult">download result</a>
-              
+
     </div>
     <div id="options-template" style="display:none;">
 headerPathString - String Used to create the propriety path, defaults to . example contact: {name: 'example} = contact.name
@@ -38,6 +38,9 @@ headerPathString - String Used to create the propriety path, defaults to . examp
 
 fillGaps - Boolean Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to false Issue #22
   <input type="checkbox" name="fillGabs" value="true" />  true
+
+fillTopRow - Boolean - Try filling top rows first for unpopular columns, defaults to `false`
+  <input type="checkbox" name="fillTopRow" value="true" />  true
 
 headers - Array Used to set a custom header order, defaults to [] example ['lastname', 'name']
 
