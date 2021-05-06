@@ -1,5 +1,6 @@
 ## Change log
 ----------------------
+- v3.2.0 - fix value 0 from being omitted
 - v3.0.1 - fix column values with zero (0) are being replaced with "" (sregger)
 - v3.0.0 - Promise API & fillTopRow
 - v2.5.2 - fix stream memory limit (issue #64)

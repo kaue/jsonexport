@@ -1,6 +1,6 @@
 {
   "name": "jsonexport",
-  "version": "3.0.1",
+  "version": "3.2.0",
   "description": "Makes easy to convert JSON to CSV",
   "main": "./lib",
   "scripts": {
@@ -8,7 +8,8 @@
     "lint": "./node_modules/.bin/jshint ./lib/index.js",
     "build:dist": "npm-run-all build:dist:js build:dist:overwrite",
     "build:dist:js": "babel lib --out-dir dist --presets=env",
-    "build:dist:overwrite": "node ./bin/builddist.js"
+    "build:dist:overwrite": "node ./bin/builddist.js",
+    "deploy": "npm run build:dist && npm publish"
   },
   "pre-commit": [
     "build:dist"

@@ -6,7 +6,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM Downloads](https://img.shields.io/npm/dt/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
 [![NPM License](https://img.shields.io/npm/l/jsonexport.svg?style=flat)](https://www.npmjs.org/package/jsonexport)
-[![GitHub stars](https://img.shields.io/github/stars/kauegimenes/jsonexport.svg)](https://github.com/kauegimenes/jsonexport/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/kauegimenes/jsonexport.svg)](https://github.com/kaue/jsonexport/stargazers)
 [![Try jsonexport on RunKit](https://badge.runkitcdn.com/jsonexport.svg)](https://npm.runkit.com/jsonexport)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/jsonexport)
 
@@ -20,9 +20,9 @@
 
 ✔ **fast** ⚡ 
 
-[Project Page](https://kauegimenes.github.io/jsonexport/)
+[Project Page](https://kaue.github.io/jsonexport/)
 
-[Online Demo Page](https://kauegimenes.github.io/jsonexport/demo/)
+[Online Demo Page](https://kaue.github.io/jsonexport/demo/)
 
 <details>
   <summary><b>Table of Contents</b></summary>
@@ -262,7 +262,7 @@ size,10;20
 In order to get the most of out of this module, you can customize many parameters and functions.
 
 - `headerPathString` - `String` Used to create the propriety path, defaults to `.` example `contact: {name: 'example}` = `contact.name`
-- `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kauegimenes/jsonexport/issues/22)
+- `fillGaps` - `Boolean` Set this option if don't want to have empty cells in case of an object with multiple nested items (array prop), defaults to `false` [Issue #22](https://github.com/kaue/jsonexport/issues/22)
 - `fillTopRow` - `Boolean` try filling top rows first for unpopular colums, defaults to `false`
 - `headers` - `Array` Used to set a custom header order, defaults to `[]` example `['lastname', 'name']`
 - `rename` - `Array` Used to set a custom header text, defaults to `[]` example `['Last Name', 'Name']`
@@ -369,9 +369,9 @@ const options = {
 > It is NOT an error, however the recursive result becomes illegable functionality strings
 
 ## Contributors
-- [Kauê Gimenes](https://github.com/kauegimenes)
+- [Kauê Gimenes](https://github.com/kaue)
 - [Pierre Guillaume](https://github.com/papswell)
 - [Acker Apple](https://github.com/AckerApple) [![hire me](https://ackerapple.github.io/resume/assets/images/hire-me-badge.svg)](https://ackerapple.github.io/resume/)
 - [Victor Hahn](https://github.com/rv-vhahn)
 - [Jason Macgowan](https://github.com/jasonmacgowan)
-- [And many more...](https://github.com/kauegimenes/jsonexport/graphs/contributors)
+- [And many more...](https://github.com/kaue/jsonexport/graphs/contributors)
