@@ -37,7 +37,8 @@ module.exports = function () {
     includeHeaders: true, //     Boolean
     fillGaps: false, //          Boolean
     verticalOutput: true, //     Boolean
-    forceTextDelimiter: false //Boolean
+    forceTextDelimiter: false, //Boolean
+    forceTextStrings: false //  Boolean
   };
   // argument parsing
   var json = void 0,

@@ -20,7 +20,7 @@ var Parser = function () {
     this._options = options || {};
     this._handler = new Handler(this._options);
     this._headers = this._options.headers || [];
-    this._escape = require('../core/escape-delimiters')(this._options.textDelimiter, this._options.rowDelimiter, this._options.forceTextDelimiter);
+    this._escape = require('../core/escape-delimiters')(this._options.textDelimiter, this._options.rowDelimiter, this._options.forceTextDelimiter, this._options.forceTextStrings);
   }
 
   /**
@@ -237,7 +237,7 @@ var Parser = function () {
         return _this._options.rename[_this._options.headers.indexOf(header)] || header;
       });
 
-      if (this._options.forceTextDelimiter) {
+      if (this._options.forceTextDelimiter || this._options.forceTextStrings) {
         headers = headers.map(function (header) {
           return '' + _this._options.textDelimiter + header + _this._options.textDelimiter;
         });

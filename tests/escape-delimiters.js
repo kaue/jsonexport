@@ -14,7 +14,8 @@ describe('escapeDelimiters', () => {
     simpleRow: 'I am a \n multi line field',
     complexField: 'I am a \n multi line field containing "textDelimiters"',
     alreadyEscaped: '"I contain "double quotes" everywhere !"',
-    forceEscape: 42
+    forceEscape: 42,
+    forceString: "Sample",
   };
 
   it('should escape textDelimiters', () => {
@@ -38,9 +39,22 @@ describe('escapeDelimiters', () => {
   });
 
   it('should escape if forceTextDelimiter flag is true', () => {
-    var escapeDelimiters = require('../lib/core/escape-delimiters')('"', '\n', true);
+    const escapeDelimiters = require('../lib/core/escape-delimiters')('"', '\n', true);
 
     expect(escapeDelimiters(mocks.forceEscape)).to.be.a.string;
     expect(escapeDelimiters(mocks.forceEscape)).to.be.equal('"42"');
+  });
+
+  it('should escape if forceTextStrings flag is true', () => {
+    const escapeDelimiters = require('../lib/core/escape-delimiters')('"', '\n', false, true);
+
+    expect(escapeDelimiters(mocks.forceString)).to.be.a.string;
+    expect(escapeDelimiters(mocks.forceString)).to.be.equal('"Sample"');
+  });
+  it('should not escape if forceTextStrings flag is true', () => {
+    const escapeDelimiters = require('../lib/core/escape-delimiters')('"', '\n', false, true);
+
+    expect(escapeDelimiters(mocks.forceEscape)).to.be.a('number');
+    expect(escapeDelimiters(mocks.forceEscape)).to.be.equal(42);
   });
 });
